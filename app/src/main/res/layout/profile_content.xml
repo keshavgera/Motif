@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@drawable/border_simple">
+
+        <LinearLayout
+            android:id="@+id/lnr1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                style="@style/TextViewSmallBlack"
+                android:text="Sex"/>
+            <TextView
+                android:id="@+id/tv_sex"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.40"
+                style="@style/TextViewSmallBlack"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnr2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_below="@+id/lnr1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                style="@style/TextViewSmallBlack"
+                android:text="Designation"/>
+            <TextView
+                android:id="@+id/tv_lower_desig"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.40"
+                style="@style/TextViewSmallBlack"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnr3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_below="@+id/lnr2"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                style="@style/TextViewSmallBlack"
+                android:text="Reporting To"/>
+            <TextView
+                android:id="@+id/tv_reportTo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.40"
+                style="@style/TextViewSmallBlack"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnr4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_below="@+id/lnr3"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                style="@style/TextViewSmallBlack"
+                android:text="Department"/>
+            <TextView
+                android:id="@+id/tv_department"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.40"
+                style="@style/TextViewSmallBlack"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnr5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_below="@+id/lnr4"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                style="@style/TextViewSmallBlack"
+                android:text="Joining Date"/>
+            <TextView
+                android:id="@+id/tv_joining"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.40"
+                style="@style/TextViewSmallBlack"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnr6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_below="@+id/lnr5"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                style="@style/TextViewSmallBlack"
+                android:text="Location"/>
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.40"
+                style="@style/TextViewSmallBlack"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnr7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_below="@+id/lnr6"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.60"
+                style="@style/TextViewSmallBlack"
+                android:text="Address"/>
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.40"
+                style="@style/TextViewSmallBlack"
+                android:text="-"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:background="@drawable/border_simple">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.30"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="1">
+
+                <ImageView
+                    android:id="@+id/img_call"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/call_icon"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.10"/>
+
+                <TextView
+                    android:id="@+id/tv_mobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.80"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="9989898989" />
+
+                <ImageView
+                    android:id="@+id/img_chat"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/chat_icon"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.10"/>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="48dp"
+                android:background="#ebebeb"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="1"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="7dp"
+                android:layout_weight="1.70">
+
+                <ImageView
+                    android:id="@+id/img_email"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/mail_icon"
+                    android:layout_weight="0.10"/>
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.90"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="test@gmail.com" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

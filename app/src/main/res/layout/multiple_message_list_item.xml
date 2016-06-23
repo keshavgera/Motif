@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <RelativeLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+
+        android:background="@color/white">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/iv_userimge"
+            android:layout_centerVertical="true"
+            android:src="@color/grey"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_userimge"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_username"
+                android:text="Ranjeet"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/Blue"
+                />
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_username"
+                android:text=""
+                android:textSize="13sp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/user_name"
+                android:layout_toRightOf="@+id/iv_userimge"
+                />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chek_value_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:button="@drawable/custome_checked"
+            android:layout_marginRight="25dp"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.6dp"
+        android:background="#F0F0F0" />
+</LinearLayout>
+

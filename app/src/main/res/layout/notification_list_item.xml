@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <RelativeLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/white">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_notImage"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:src="@color/light_grey"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/iv_notImage"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/lnrnot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/notification_title"
+                    style="@style/TextViewHeading"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="0.65"
+                    android:text="Notification" />
+
+                <TextView
+                    android:id="@+id/listDate"
+                    style="@style/TextViewDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/notification_title"
+                    android:layout_weight="0.35"
+                    android:text="1st Jan 2015" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/listAlert"
+                style="@style/TextViewDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lnrnot"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+
+                android:layout_marginTop="5dp"
+                android:text="Text"
+
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.6dp"
+        android:background="#F0F0F0" />
+    <!--     <HorizontalScrollView
+           android:id="@+id/scrollview"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/liked_number"
+           android:scrollbars="none"
+           android:background="@color/Blue">
+
+           <LinearLayout
+               android:id="@+id/addview"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="5dp"
+               android:layout_marginRight="10dp"
+               android:layout_marginTop="20dp"
+               android:orientation="horizontal">
+
+           </LinearLayout>
+       </HorizontalScrollView>-->
+
+</LinearLayout>
+

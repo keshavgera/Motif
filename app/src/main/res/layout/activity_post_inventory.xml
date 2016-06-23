@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.codecube.keshav.motif.UploadRequirementActivity">
+
+    <RelativeLayout
+        android:id="@+id/rly_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_simple"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="8dp"
+                android:padding="@dimen/text_input_padding"
+                android:text="Type of Property"
+                android:textColor="#000000" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_type_of_property"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_weight="1"
+                android:fadingEdge="none"
+                android:padding="@dimen/text_input_padding"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/ln_type_of_property"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="5"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/lny_guest_house_inventory"
+                        android:layout_width="100dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@color/button_deselect"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_marginTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:src="@drawable/guest_house" />
+
+                        <TextView
+                            android:id="@+id/guest_house_inventory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:text="Guest House"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:textColor="@drawable/selector_button" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/lny_house_inventory"
+                        android:layout_width="100dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@color/button_deselect"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_marginTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:src="@drawable/house" />
+
+                        <TextView
+                            android:id="@+id/house_inventory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:text="House"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:textColor="@drawable/selector_button" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lny_apartments_inventory"
+                        android:layout_width="100dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@color/button_deselect"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_marginTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:src="@drawable/apartment" />
+
+
+                        <TextView
+                            android:id="@+id/apartments_inventory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:text="Apartments"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:textColor="@drawable/selector_button" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lny_pg_inventory"
+                        android:layout_width="100dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:background="@color/button_deselect"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:paddingBottom="5dp"
+                            android:src="@drawable/pg" />
+
+                        <TextView
+                            android:id="@+id/pg_inventory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:text="PG"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:textColor="@drawable/selector_button" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lny_villa_inventory"
+                        android:layout_width="100dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:background="@color/button_deselect"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:paddingBottom="5dp"
+                            android:src="@drawable/villa" />
+
+                        <TextView
+                            android:id="@+id/villa_inventory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:text="Villa"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:textColor="@drawable/selector_button" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding"
+                android:text="Furnishing"
+                android:textColor="#000000" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:weightSum="3"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/fully_inventory"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="Fully" />
+
+                    <Button
+                        android:id="@+id/semi_inventory"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="Semi" />
+
+                    <Button
+                        android:id="@+id/row_inventory"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="Raw" />
+
+
+                </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="5dp"
+                android:paddingTop="@dimen/text_input_padding"
+                android:paddingLeft="@dimen/text_input_padding"
+                android:paddingRight="@dimen/text_input_padding"
+                android:text="Select a City"
+                android:textColor="#000000" />
+
+            <Spinner
+                android:id="@+id/spinner_city_inventory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textSize="17sp"
+                android:inputType="textNoSuggestions"
+                android:paddingBottom="1dp"
+                android:paddingRight="5dp" />
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_location_inventory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/auto_preferred_location_inventory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions"
+                    android:completionThreshold="1"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:imeOptions="actionNext"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:hint="Preferred Location"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="8dp"
+                android:padding="@dimen/text_input_padding"
+                android:text="Rooms"
+                android:textColor="#000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:weightSum="6"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/room_one_inventory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@drawable/selector_button"
+                    android:background="@color/deselect"
+                    android:layout_weight="1"
+                    android:text="1" />
+                <Button
+                    android:id="@+id/room_two_inventory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@drawable/selector_button"
+                    android:background="@color/deselect"
+                    android:text="2" />
+                <Button
+                    android:id="@+id/room_three_inventory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@drawable/selector_button"
+                    android:background="@color/deselect"
+                    android:layout_weight="1"
+                    android:text="3" />
+                <Button
+                    android:id="@+id/room_four_inventory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@drawable/selector_button"
+                    android:background="@color/deselect"
+                    android:text="4" />
+                <Button
+                    android:id="@+id/room_five_inventory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@drawable/selector_button"
+                    android:background="@color/deselect"
+                    android:text="5" />
+
+                <Button
+                    android:id="@+id/room_five_plus_inventory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@drawable/selector_button"
+                    android:background="@color/deselect"
+                    android:text="5+" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="8dp"
+                android:padding="@dimen/text_input_padding"
+                android:text="Floor"
+                android:textColor="#000000" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_scroll_view_floor"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:fadingEdge="none"
+                android:padding="@dimen/text_input_padding"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:weightSum="20"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/ground_floor"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="0" />
+
+                    <Button
+                        android:id="@+id/floor_one"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="1" />
+
+                    <Button
+                        android:id="@+id/floor_two"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="2" />
+
+                    <Button
+                        android:id="@+id/floor_three"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="3" />
+
+                    <Button
+                        android:id="@+id/floor_four"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="4" />
+                    <Button
+                        android:id="@+id/floor_five"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="5" />
+                    <Button
+                        android:id="@+id/floor_six"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="6" />
+                    <Button
+                        android:id="@+id/floor_seven"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="7" />
+                    <Button
+                        android:id="@+id/floor_eight"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="8" />
+                    <Button
+                        android:id="@+id/floor_nine"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="9" />
+                    <Button
+                        android:id="@+id/floor_ten"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="10" />
+                    <Button
+                        android:id="@+id/floor_eleven"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="11" />
+
+                    <Button
+                        android:id="@+id/floor_twelve"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="12" />
+                    <Button
+                        android:id="@+id/floor_thirten"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="13" />
+                    <Button
+                        android:id="@+id/floor_fourten"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="14"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        />
+                    <Button
+                        android:id="@+id/floor_fiften"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:text="15" />
+                    <Button
+                        android:id="@+id/floor_sixten"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="16" />
+                    <Button
+                        android:id="@+id/floor_seventen"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="17" />
+                    <Button
+                        android:id="@+id/floor_eighteen"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="18" />
+                    <Button
+                        android:id="@+id/floor_ninteen"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="19" />
+                    <Button
+                        android:id="@+id/floor_twenty"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@drawable/selector_button"
+                        android:background="@color/deselect"
+                        android:layout_height="match_parent"
+                        android:text="20" />
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_excepted_rent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="8dp"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_excepted_rent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top"
+                    android:hint="Excepted Rent"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true"></EditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_specification"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="8dp"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_specification_inventory"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top"
+                    android:hint="Specification"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true"></EditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+<!--
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_specific_criteria"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="8dp"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_specific_criteria"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top"
+                    android:hint="Specific Criteria"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true"></EditText>
+
+            </android.support.design.widget.TextInputLayout>
+-->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

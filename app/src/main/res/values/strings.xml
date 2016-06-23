@@ -1,0 +1,119 @@
+<resources>
+    <string name="app_name">Motif</string>
+    <string name="gcm_notification_key">149029561566</string>
+
+    <!--TODO https://developers.google.com/cloud-messaging/android/client#sample-register-->
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="hello_world">Hello world!</string>
+    <string name="process">Processing</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="likes">likes</string>
+    <string name="comments">comments</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_check">Check</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile No</string>
+    <string name="signUp">Sign UP</string>
+    <string name="already_have_an_account">Already have an account? Login</string>
+    <string name="do_not_have_an_account">do not have an account yet? SIGN UP</string>
+    <string name="sign_u_type">Sign TYPE</string>
+    <string name="opening_job">Opening for \n a fassing desiner \n with 0-2 yrs experience.</string>
+    <string name="action_search">Search</string>
+
+    <string name="search_hint">Search</string>
+
+    <!-- <string name="app_id">1557139644613353</string>-->
+    <string name="app_id">468467423351420</string>
+
+
+    <!-- Order is important here: -->
+    <string-array name="country_names">
+        <item>\u00A0\u00A0+1 United States"</item>
+        <item>+45 Denmark</item>
+        <item>+46 Sweden</item>
+        <item>+47 Norway</item>
+    </string-array>
+
+    <string-array name="country_codes">
+        <item>1</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+    </string-array>
+
+    <!--<string-array name="country_flags">-->
+    <!--<item>@drawable/ic_launcher</item>-->
+    <!--<item>@drawable/edit_icon</item>-->
+    <!--<item>@drawable/delete_icon</item>-->
+    <!--<item>@drawable/frow_logo</item>-->
+    <!--</string-array>-->
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items_corporate">
+        <item>Home</item>
+        <item>Upload Requirement</item>
+        <item>Messages</item>
+        <item>News</item>
+        <item>Notifications</item>
+        <item>Settings</item>
+        <item>Logout</item>
+
+    </string-array>
+
+    <string-array name="nav_drawer_items_broker">
+        <item>Home</item>
+        <item>Post Inventory</item>
+        <item>Messages</item>
+        <item>News</item>
+        <item>Notifications</item>
+        <item>Settings</item>
+        <item>Logout</item>
+
+    </string-array>
+
+    <array name="nav_drawer_icons">
+
+        <!--  <item>@drawable/home_icon</item>
+        <item>@drawable/explore_icon</item>
+
+        <item>@drawable/manage_jobs</item>
+        <item>@drawable/manage_jobs</item>
+
+        <item>@drawable/manage_jobs</item>
+        <item>@drawable/notification_icon</item>
+
+        <item>@drawable/camera_icon</item>
+        <item>@drawable/setting_icon</item>-->
+
+
+    </array>
+
+
+    <string name="MyKumpany.in">TaxManager.in</string>
+    <string name="line16">- Whats App Support - +919015960749</string>
+    <string name="line15">- Call Center - +919555331122</string>
+    <string name="line14">- Email us at support@taxmanager.in</string>
+    <string name="line13">- Appoint a CA</string>
+    <string name="line12">- Check Refund and ITR V Status</string>
+    <string name="line11">- Tax Notice Reply Service</string>
+    <string name="line10">- Tax Calculator – to help you assess your income tax payable</string>
+    <string name="line9">- Various Efiling Packages – Self eFiling and CA eFiling Packages</string>
+    <string name="line8">- Separate Team for NRI Tax Returns Service</string>
+    <string name="line7">- Excellent Customer Support for all your Income Tax Queries</string>
+    <string name="line6">- Registered e Return Intermediary with Department of Income Tax Since 2009</string>
+    <string name="line5">- Over Lakhs of Indian Tax Payers used the online tool of www.TaxManager.in till date</string>
+    <string name="line4">- Team of CA and MBA in Fin forming a team of Tax Professionals for all your tax queries</string>
+    <string name="line3">- One of the highly rated and trusted Tax e-Filing and Management Company in India</string>
+    <string name="line2">With this App you can look to eFile your Income Tax Return your self or Let our CA efile your taxes and thus helping you claiming maximum tax refund lawfully.</string>
+    <string name="line1">an e Return Intermediary with Department of Income Tax since 2009 can help you manage, save and eFile your Income Tax seamlessly with DIT. All Indian Tax Payers can use our online tool or app to calculate, manage and save income tax. We are one of the top leading Tax eFiling Companies in India helping over lakhs of Indian Tax Payers using our platform to manage and eFile their Income Tax since 2009.</string>
+    <string name="an">an e Return Intermediary with Department of Income Tax since 2009 can help you manage, save and eFile your Income Tax seamlessly with DIT. All Indian Tax Payers can use our online tool or app to calculate, manage and save income tax. We are one of the top leading Tax eFiling Companies in India helping over lakhs of Indian Tax Payers using our platform to manage and eFile their Income Tax since 2009. </string>
+
+</resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#404041</color>
+    <color name="orange">#FA0</color>
+    <color name="pink">#e84052</color>
+
+<!--
+    <color name="select">#A7C9D4</color>
+    <color name="deselect">#A4A4A4</color>
+-->
+    <color name="select">#377eb4</color>
+    <!--<color name="select">#FF3434A2</color>-->
+    <color name="deselect">#CED1D2</color>
+
+    <color name="button_deselect">#CED1D2</color>
+    <color name="button_select">#377eb4</color>
+
+
+    <color name="grey">#CCC</color>
+    <color name="greay">#F2F2F2</color>
+    <color name="primary">#BEBEBE</color>
+    <color name="primaryDark">#F2F2F2</color>
+    <color name="textColor">#384A50</color>
+    <color name="dummy_frst">#346dA2</color>
+    <color name="dummy_scnd">#51d374</color>
+    <color name="dummy_thrd">#e437ce</color>
+    <color name="dummy_fourth">#6fdbe9</color>
+    <color name="cyan">#33ffff</color>
+    <color name="dummy_fifth">#de7d9d</color>
+    <color name="actionbar_icon">#394B53</color>
+    <color name="GrayAlpha">#CED1D2</color>
+    <color name="light_grey">#A4A4A4</color>
+
+
+    <color name="lightgray">#808284</color>
+    <color name="hedarcolor">#737373</color>
+    <color name="textcolor">#7d7d7d</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="user_name">#808284</color>
+    <color name="Gray">#BFBDBD</color>
+    <color name="Blue">#40A6E8</color>
+
+    <color name="default_bubble_background_color">#CED1D2</color>
+    <color name="bubble_border">#e437ce</color>
+    <color name="checked_color">#e437ce</color>
+    <color name="unchecked_color">#CED1D2</color>
+    <color name="background">#FFee6666</color>
+    <color name="text_color">#CED1D2</color>
+    <color name="edit_text_background">#FFbbccFF</color>
+
+
+    <color name="list_item_title">#000000</color>
+    <color name="list_background">#EBEBEB</color>
+    <color name="list_background_pressed">#C7C7C7</color>
+    <color name="list_background_selector">#ff0000</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+    <color name="dtBlue">#CEE6F2</color>
+    <color name="lightBlue">#E6F3F9</color>
+    <color name="actionBarColor">#CB3F32</color>
+    <color name="transparent">#00000000</color>
+    <color name="graphGrey">#A7C9D4</color>
+    <color name="green">#0CCF3D</color>
+    <color name="light_greyeeeeeeeeeee">#A4A4A4</color>
+    <color name="orangeeee">#FA9D23</color>
+    <color name="red">#FF0000</color>
+    <color name="product_price_color">#710000</color>
+    <color name="attendance_remarks">#d3d3d3</color>
+    <color name="background_listview">#f9f9f9</color>
+    <color name="attendance_color">#009933</color>
+    <color name="tv_medium_color">#d3d3d3</color>
+    <color name="tv_small_color">#f9f9f9</color>
+    <color name="tv_detail_color">#5a5a5a</color>
+    <color name="tv_date_color">#606060</color>
+    <color name="tv_price_color">#B21609</color>
+    <color name="et_hint_color">#D7D7D7</color>
+    <color name="et_text_color">#000000</color>
+    <color name="border_color">#D9D9D9</color>
+    <color name="actionbar_transparent">#E59E98</color>
+    <color name="popup_background_color">#303030</color>
+
+
+</resources>

@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".HomeActivity">
+
+    <item android:id="@+id/reload_refresh"
+        android:title=""
+        android:icon="@drawable/reload_refresh"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/plus_udated"
+        android:title=""
+        android:icon="@drawable/plus_udated"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+
+
+</menu>
+

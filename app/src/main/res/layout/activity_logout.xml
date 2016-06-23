@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_logout"
+        android:layout_width="match_parent"
+        app:titleTextAppearance="@style/ToolbarTitle"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_collapseMode="pin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="start"
+            android:textColor="@color/hedarcolor"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/toolbar_title_logout" />
+    </android.support.v7.widget.Toolbar>
+</RelativeLayout>

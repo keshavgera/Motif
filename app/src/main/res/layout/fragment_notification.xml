@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_container_notification"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_listview">
+
+
+        <RelativeLayout
+            android:id="@+id/len2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"></ListView>
+
+            <ImageView
+                android:id="@+id/img_noDataFoundNotification"
+                android:layout_width="150dp"
+                android:layout_height="250dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/no_record_found"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

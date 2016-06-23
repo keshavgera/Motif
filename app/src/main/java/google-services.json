@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "149029561566",
+    "project_id": "motif-24997"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149029561566:android:0eb576a1132578b8",
+        "android_client_info": {
+          "package_name": "com.codecube.keshav.motif"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI1gNnHbrBhMm5TwpDr-IadXxgypfR064"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

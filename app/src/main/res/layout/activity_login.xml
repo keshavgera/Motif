@@ -1,0 +1,136 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/relImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/imgLogin"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="60dp"
+                android:padding="5dp"
+                android:src="@drawable/motif_logo"
+                android:layout_centerHorizontal="true"
+                 />
+            <!--android:src="@drawable/icon_mykumpany"-->
+
+            <TextView
+                android:id="@+id/txtLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgLogin"
+                android:layout_centerHorizontal="true"
+                android:text="My Kumpany"
+                android:visibility="gone"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relImg"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:fontFamily="sans-serif"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:singleLine="true"
+                    android:gravity="top"
+                    android:maxLength="10"
+                    android:hint="Login ID"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding">
+                </EditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+<!--     android:maxLines="10" -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding"
+                android:layout_below="@+id/textInputLayout1">
+                <EditText
+                    android:id="@+id/edtPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:singleLine="true"
+                    android:hint="Password"
+                    android:fontFamily="sans-serif"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <RelativeLayout
+                android:id="@+id/rel12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout2"
+                android:layout_marginTop="20dp" >
+
+                <Button
+                    android:id="@+id/loginSub"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:text="Login"
+                    android:background="@color/select"
+                    android:textColor="@color/white" />
+
+<!--        android:background="@drawable/border_button"-->
+                <TextView
+                    android:id="@+id/forgotPass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="10dp"
+                    android:text="Forgot Password ?"
+                    android:visibility="gone"
+                    android:textColor="#0188C0" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

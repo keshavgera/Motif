@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/msg_toolbar"
+        layout="@layout/toolbar"/>
+    <View
+        android:id="@+id/lineview"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/msg_toolbar"
+        android:background="@drawable/toolbar_dropshadow" />
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_container_message_activity"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/lineview"
+        android:layout_above="@+id/rl_bottomlaout"
+        android:layout_height="match_parent">
+
+        <!--        android:layout_below="@+id/lineview"
+        android:layout_above="@+id/rl_bottomlaout"  -->
+    <ListView
+        android:id="@+id/messagesContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@null"
+        android:divider="@null"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"></ListView>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottomlaout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/box3">
+
+        <EditText
+            android:id="@+id/msg"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="@drawable/border_spinner"
+            android:layout_centerVertical="true"
+            android:hint="Write message"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/iv_camera"/>
+
+        <ImageView
+            android:id="@+id/send"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/send"/>
+
+    </RelativeLayout>
+</RelativeLayout>
