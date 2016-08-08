@@ -2,17 +2,9 @@ package fragments;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -32,17 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import MyPreference.LoginPreferences;
 import adapters.NewsAdapter;
-import adapters.NewsListAdapter;
-import models.NewsDataList;
 import models.NewsPojo;
+import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
 
@@ -74,9 +61,15 @@ public class NewsFragment extends Fragment
             public void onRefresh() {
                 new GetNewsList().execute();
                 swipe_container_news.setRefreshing(false);
-
             }
         });
+
+        if(!CommonMethod.isOnline(getActivity()))
+        {
+            CommonMethod.showAlert("Intenet Connectivity Failure",getActivity());
+        }else{
+            new GetNewsList().execute();
+        }
 
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -95,7 +88,6 @@ public class NewsFragment extends Fragment
             }
         });
 
-        new GetNewsList().execute();
 
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();

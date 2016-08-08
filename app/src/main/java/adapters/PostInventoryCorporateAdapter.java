@@ -54,33 +54,26 @@ public class PostInventoryCorporateAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.corporate_list_item, null, true);
             holder = new ViewHolder();
 
-//            holder.name = (TextView) convertView.findViewById(R.id.tv_corporate_name_broker);
-//            holder.mobileNo = (TextView) convertView.findViewById(R.id.tv_corporate_mobile_broker);
-            holder.typeOfProperty = (TextView) convertView.findViewById(R.id.tv_type_of_property_broker);
-            holder.furnishing = (TextView) convertView.findViewById(R.id.tv_furnishing_broker);
-//            holder.floor = (TextView) convertView.findViewById(R.id.floor_broker);
-//            holder.rooms = (TextView) convertView.findViewById(R.id.tv_rooms_broker);
-//            holder.location = (TextView) convertView.findViewById(R.id.tv_location_broker);
-            holder.expRent = (TextView) convertView.findViewById(R.id.tv_exp_rent_broker);
-//            holder.specificRequirement = (TextView) convertView.findViewById(R.id.tv_specific_requirement_broker);
-            holder.specification = (TextView) convertView.findViewById(R.id.tv_specification_broker);
+            holder.typeOfProperty = (TextView) convertView.findViewById(R.id.tv_type_of_property_corporate);
+            holder.furnishing = (TextView) convertView.findViewById(R.id.tv_furnishing_corporate);
+            holder.rooms = (TextView) convertView.findViewById(R.id.tv_rooms_corporate);
+            holder.location = (TextView) convertView.findViewById(R.id.tv_preferred_location_corporate);
+            holder.expRent = (TextView) convertView.findViewById(R.id.tv_exp_rent_corporate);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-//        holder.name.setText(postInventoryCorporatePojoArrayList.get(position).getName());
-//        holder.mobileNo.setText(postInventoryCorporatePojoArrayList.get(position).getMobileNo());
+        holder.typeOfProperty.setText(postInventoryCorporatePojoArrayList.get(position).getTypeOfProperty() + " Available For Rent");
+        holder.furnishing.setText(postInventoryCorporatePojoArrayList.get(position).getFurnishing()+" Furnish");
 
-        holder.typeOfProperty.setText(postInventoryCorporatePojoArrayList.get(position).getTypeOfProperty());
-        holder.furnishing.setText(postInventoryCorporatePojoArrayList.get(position).getFurnishing());
-//        holder.floor.setText(postInventoryCorporatePojoArrayList.get(position).getFloor());
-//        holder.rooms.setText(postInventoryCorporatePojoArrayList.get(position).getRooms());
-//        holder.location.setText(postInventoryCorporatePojoArrayList.get(position).getLocation());
+        if(postInventoryCorporatePojoArrayList.get(position).getNoOfBedRooms().equals("1"))
+            holder.rooms.setText(postInventoryCorporatePojoArrayList.get(position).getNoOfBedRooms()+" Room");
+        else
+            holder.rooms.setText(postInventoryCorporatePojoArrayList.get(position).getNoOfBedRooms()+" Rooms");
+        holder.location.setText(postInventoryCorporatePojoArrayList.get(position).getLocation());
         holder.expRent.setText(postInventoryCorporatePojoArrayList.get(position).getExpRent());
-        holder.specification.setText(postInventoryCorporatePojoArrayList.get(position).getSpecification());
-//        holder.specificRequirement.setText(postInventoryCorporatePojoArrayList.get(position).getSpecificRequirement());
 
         return convertView;
     }

@@ -2,6 +2,7 @@ package com.codecube.keshav.motif;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -100,6 +101,12 @@ public class PostInventoryActivity extends AppCompatActivity
         lny_house= (LinearLayout)findViewById(R.id.lny_house_inventory);
         lny_pg= (LinearLayout)findViewById(R.id.lny_pg_inventory);
         lny_villa= (LinearLayout)findViewById(R.id.lny_villa_inventory);
+
+        if(!CommonMethod.isOnline(PostInventoryActivity.this))
+        {
+            CommonMethod.showAlert("Intenet Connectivity Failure",PostInventoryActivity.this);
+        }
+
 
 
         row = (Button) findViewById(R.id.row_inventory);
@@ -1038,9 +1045,27 @@ public class PostInventoryActivity extends AppCompatActivity
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                Intent intent=new Intent(PostInventoryActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+                new android.support.v7.app.AlertDialog.Builder(PostInventoryActivity.this)
+                        .setTitle("Are you sure you want to exit?")
+                        .setMessage("")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+                                        PostInventoryActivity.super.onBackPressed();
+                                        Intent intent = new Intent(PostInventoryActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                }).setNegativeButton("No", null).show();
+
+//                Intent intent=new Intent(PostInventoryActivity.this, HomeActivity.class);
+//                startActivity(intent);
+//                finish();
                 break;
 
             case R.id.done:
@@ -1058,10 +1083,28 @@ public class PostInventoryActivity extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-        PostInventoryActivity.super.onBackPressed();
-        Intent intent = new Intent(PostInventoryActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+        new android.support.v7.app.AlertDialog.Builder(PostInventoryActivity.this)
+                .setTitle("Are you sure you want to exit?")
+                .setMessage("")
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                PostInventoryActivity.super.onBackPressed();
+                                Intent intent = new Intent(PostInventoryActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        }).setNegativeButton("No", null).show();
+
+//        PostInventoryActivity.super.onBackPressed();
+//        Intent intent = new Intent(PostInventoryActivity.this, HomeActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 
     public class PostInventoryAsyncTask extends AsyncTask<String, Void, String> {

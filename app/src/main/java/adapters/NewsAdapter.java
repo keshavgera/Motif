@@ -28,8 +28,10 @@ public class NewsAdapter extends BaseAdapter
     ArrayList<NewsPojo> newsPojoArrayList;
 
     LayoutInflater inflater;
+
+    private ImageLoader imgLoader;
+
     private ImageLoader1 imgload;
-    ImageLoader imgLoader;
     public static ImageView newsImage;
 
 
@@ -41,6 +43,11 @@ public class NewsAdapter extends BaseAdapter
         this.newsPojoArrayList = newsPojoArrayList;
         inflater = (LayoutInflater) mcontext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        imgLoader = ImageLoader.getInstance();
+        imgLoader.destroy();
+        imgLoader.init(ImageLoaderConfiguration.createDefault(mcontext));
+        imgload = new ImageLoader1(mcontext);
     }
 
     @Override
@@ -91,6 +98,8 @@ public class NewsAdapter extends BaseAdapter
                 .error(R.color.light_grey)
                 .placeholder(R.color.light_grey)
                 .into(newsImage);
+
+        imgload.DisplayImage(mcontext, newsPojoArrayList.get(position).newsImgage, newsImage);
 
 
         holder.newsId.setText(newsPojoArrayList.get(position).getNewsId());

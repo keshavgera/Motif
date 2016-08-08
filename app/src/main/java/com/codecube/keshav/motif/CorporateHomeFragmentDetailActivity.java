@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class CorporateHomeFragmentDetailActivity extends AppCompatActivity
     TextView tv_contact_no_details;
     TextView tv_broker_name;
 
-    ImageView iv_call_broker;
+    Button broker_yes_i_have;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,7 +53,7 @@ public class CorporateHomeFragmentDetailActivity extends AppCompatActivity
         tv_exc_rent_details = (TextView) findViewById(R.id.tv_exc_rent_details);
         tv_contact_no_details = (TextView) findViewById(R.id.tv_contact_no_details);
         tv_broker_name = (TextView) findViewById(R.id.tv_broker_name);
-        iv_call_broker = (ImageView) findViewById(R.id.iv_call_broker);
+        broker_yes_i_have = (Button) findViewById(R.id.broker_yes_i_have);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_include);
         toolbarTitle = (TextView) findViewById(R.id.toolbar_title_include);
@@ -82,7 +83,7 @@ public class CorporateHomeFragmentDetailActivity extends AppCompatActivity
         final String mobile = postInventoryCorporatePojo.getMobileNo();
 
 
-        iv_call_broker.setOnClickListener(new View.OnClickListener() {
+        broker_yes_i_have.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);

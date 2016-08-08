@@ -1,3 +1,4 @@
+
 package com.codecube.keshav.motif;
 
 import android.app.AlertDialog;
@@ -56,6 +57,11 @@ public class LogoutActivity extends AppCompatActivity {
                     LoginPreferences.getActiveInstance(LogoutActivity.this).setEmail("");
                     LoginPreferences.getActiveInstance(LogoutActivity.this).setCreatedDate("");
                     LoginPreferences.getActiveInstance(LogoutActivity.this).setUpdatedDate("");
+                    LoginPreferences.getActiveInstance(LogoutActivity.this).setProfileImage("");
+//                    LoginPreferences.getActiveInstance(LogoutActivity.this).setIsCompanyVerified("");
+
+                    LoginPreferences.getActiveInstance(LogoutActivity.this).setIsLoggedIn(false);
+
 Log.e("Logout ","clientId  is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getClientId());
 Log.e("Logout","userId  is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getUserId());
 Log.e("Logout","userType is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getUserType());
@@ -64,6 +70,9 @@ Log.e("Logout","mobile is -> " + LoginPreferences.getActiveInstance(LogoutActivi
 Log.e("Logout","email is ->" + LoginPreferences.getActiveInstance(LogoutActivity.this).getEmail());
 Log.e("Logout","createdDate is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getCreatedDate());
 Log.e("Logout","updatedDate is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getUpdatedDate());
+Log.e("Logout","IsLoggedIn is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getIsLoggedIn());
+Log.e("Logout","profileImage is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getProfileImage());
+Log.e("Logout","isCompanyVerified is -> " + LoginPreferences.getActiveInstance(LogoutActivity.this).getIsCompanyVerified());
 
                         Intent i = new Intent(LogoutActivity.this, LoginActivity.class);
                         startActivity(i);

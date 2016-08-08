@@ -12,20 +12,16 @@ import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.codecube.keshav.motif.ChangePassword;
 import com.codecube.keshav.motif.HomeActivity;
 import com.codecube.keshav.motif.PrivacyPolicyActivity;
-import com.codecube.keshav.motif.ProfileActivity;
+import com.codecube.keshav.motif.ProfileUpdateActivity;
 import com.codecube.keshav.motif.R;
 import com.codecube.keshav.motif.TermAndConditionsActivity;
 
@@ -33,7 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import MyPreference.LoginPreferences;
-import constant.AppConstants;
+import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
 
@@ -44,11 +40,12 @@ public class SettingFragment extends Fragment {
 
     /*RelativeLayout editProfile;*/
     RelativeLayout rly_change_password;
+    RelativeLayout rly_profile_update;
     RelativeLayout rel_privacy_policy;
     RelativeLayout rel_term_and_conditions;
 
-    SwitchCompat switch_education, switch_wealth_management, switch_real_estate, switch_travel;
-    SwitchCompat switch_forex_rates, switch_breaking_news, switch_entertainment,switch_taxation_related_info,switch_messages;
+    SwitchCompat switch_school_alerts, switch_wealth_management, switch_real_estate, switch_travel;
+    SwitchCompat switch_forex_rates, switch_breaking_news, switch_entertainment,switch_taxation_related_info,switch_sounds;
 
 
     FragmentManager mFragmentManager;
@@ -61,11 +58,12 @@ public class SettingFragment extends Fragment {
         setHasOptionsMenu(true);
 
         rly_change_password = (RelativeLayout) view.findViewById(R.id.rly_change_password);
+        rly_profile_update = (RelativeLayout) view.findViewById(R.id.rly_profile_update);
         /*editProfile = (RelativeLayout) view.findViewById(R.id.rl_editProfile);*/
         rel_privacy_policy = (RelativeLayout) view.findViewById(R.id.rel_privacy_policy);
         rel_term_and_conditions = (RelativeLayout) view.findViewById(R.id.rel_term_and_conditions);
 
-        switch_education = (SwitchCompat) view.findViewById(R.id.switch_education);
+        switch_school_alerts = (SwitchCompat) view.findViewById(R.id.switch_school_alerts);
         switch_wealth_management = (SwitchCompat) view.findViewById(R.id.switch_wealth_management);
         switch_real_estate = (SwitchCompat) view.findViewById(R.id.switch_real_estate);
         switch_travel = (SwitchCompat) view.findViewById(R.id.switch_travel);
@@ -73,18 +71,24 @@ public class SettingFragment extends Fragment {
         switch_breaking_news = (SwitchCompat) view.findViewById(R.id.switch_breaking_news);
         switch_entertainment = (SwitchCompat) view.findViewById(R.id.switch_entertainment);
         switch_taxation_related_info = (SwitchCompat) view.findViewById(R.id.switch_taxation_related_info);
-        switch_messages = (SwitchCompat) view.findViewById(R.id.switch_messages);
+        switch_sounds = (SwitchCompat) view.findViewById(R.id.switch_sounds);
 
 
-        switch_education.setChecked(true);
+        switch_school_alerts.setChecked(false);
         switch_wealth_management.setChecked(true);
-        switch_real_estate.setChecked(true);
+        switch_real_estate.setChecked(false);
         switch_travel.setChecked(true);
-        switch_forex_rates.setChecked(true);
-        switch_breaking_news.setChecked(true);
-        switch_entertainment.setChecked(true);
-        switch_taxation_related_info.setChecked(true);
-        switch_messages.setChecked(true);
+        switch_forex_rates.setChecked(false);
+        switch_breaking_news.setChecked(false);
+        switch_entertainment.setChecked(false);
+        switch_taxation_related_info.setChecked(false);
+        switch_sounds.setChecked(false);
+
+
+        if(!CommonMethod.isOnline(getActivity()))
+        {
+            CommonMethod.showAlert("Intenet Connectivity Failure",getActivity());
+        }
 
 
         /*editProfile.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +104,14 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), ChangePassword.class);
+                startActivity(i);
+            }
+        });
+
+        rly_profile_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ProfileUpdateActivity.class);
                 startActivity(i);
             }
         });
@@ -121,7 +133,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        switch_education.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+       /* switch_school_alerts.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -129,20 +141,20 @@ public class SettingFragment extends Fragment {
 
                 if (isChecked) {
                     switch_value = "Y";
-                    switch_type = "education";
+                    switch_type = "school Alerts";
                     new ServiceAsnc().execute();
 
 
                 } else {
                     switch_value = "N";
-                    switch_type = "education";
+                    switch_type = "school Alerts";
                     new ServiceAsnc().execute();
                 }
 
             }
-        });
+        });*/
 
-        switch_wealth_management.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+       /* switch_wealth_management.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -161,8 +173,8 @@ public class SettingFragment extends Fragment {
                 }
 
             }
-        });
-        switch_real_estate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        });*/
+       /* switch_real_estate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -170,18 +182,18 @@ public class SettingFragment extends Fragment {
 
                 if (isChecked) {
                     switch_value = "Y";
-                    switch_type = "realEstateAdvisory";
+                    switch_type = "real Estate Advisory";
                     new ServiceAsnc().execute();
 
                 } else {
                     switch_value = "N";
-                    switch_type = "realEstateAdvisory";
+                    switch_type = "real Estate Advisory";
                     new ServiceAsnc().execute();
                 }
 
             }
-        });
-        switch_travel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        });*/
+       /* switch_travel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -200,9 +212,9 @@ public class SettingFragment extends Fragment {
                 }
 
             }
-        });
+        });*/
 
-        switch_forex_rates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*switch_forex_rates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -221,8 +233,8 @@ public class SettingFragment extends Fragment {
                 }
 
             }
-        });
-        switch_breaking_news.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        });*/
+        /*switch_breaking_news.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -241,8 +253,8 @@ public class SettingFragment extends Fragment {
                 }
 
             }
-        });
-        switch_entertainment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        });*/
+        /*switch_entertainment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -261,8 +273,8 @@ public class SettingFragment extends Fragment {
                 }
 
             }
-        });
-        switch_taxation_related_info.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        });*/
+        /*switch_taxation_related_info.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -281,8 +293,8 @@ public class SettingFragment extends Fragment {
                 }
 
             }
-        });
-        switch_messages.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        });*/
+        /*switch_sounds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
@@ -290,18 +302,18 @@ public class SettingFragment extends Fragment {
 
                 if (isChecked) {
                     switch_value = "Y";
-                    switch_type = "messages";
+                    switch_type = "sounds";
             new ServiceAsnc().execute();
 
                 } else {
                     switch_value = "N";
-                    switch_type = "messages";
+                    switch_type = "sounds";
             new ServiceAsnc().execute();
 
                 }
 
             }
-        });
+        });*/
 
 
         view.setFocusableInTouchMode(true);
@@ -422,9 +434,9 @@ public class SettingFragment extends Fragment {
 
             mFragmentManager = getActivity().getSupportFragmentManager();
             mFragmentTransaction = mFragmentManager.beginTransaction();
-            mFragmentTransaction.replace(R.id.containerView, new HomeFragment()).commit();
+            mFragmentTransaction.replace(R.id.containerView, new DisplayFragment()).commit();
 
-            HomeActivity.toolbartitle.setText("Home");
+            HomeActivity.toolbartitle.setText("Motif Support");
 
             ChangePassword.changePasswordFlag = false;
         }

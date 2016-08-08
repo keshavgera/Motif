@@ -2,6 +2,8 @@ package com.codecube.keshav.motif;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import MyPreference.LoginPreferences;
+import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
 
@@ -33,7 +36,7 @@ public class ChangePassword extends AppCompatActivity
     Toolbar toolbar;
     TextView toolbarTitle;
 
-    public static boolean changePasswordFlag= false;
+    public static boolean changePasswordFlag= false;            // use in paretnt fragment  setting fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,8 @@ public class ChangePassword extends AppCompatActivity
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                ChangePassword.this.finish();
+                CommonMethod.myCustomAddPopup(ChangePassword.this);
+//                ChangePassword.this.finish();
                 break;
 
             case R.id.done:
@@ -83,6 +87,11 @@ public class ChangePassword extends AppCompatActivity
         }
 
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        CommonMethod.myCustomAddPopup(ChangePassword.this);
     }
 
 

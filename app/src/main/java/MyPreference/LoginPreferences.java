@@ -22,8 +22,34 @@ public class LoginPreferences {
     private String notificationCount = "notificationCount";
 
     private String gcmToken = "gcmToken";
-    String profileImage = "profileImage";
 
+    private String isLoggedIn = "isLoggedIn";
+
+    public boolean getIsLoggedIn() {
+        return mPreferences.getBoolean(this.isLoggedIn, false);
+    }
+
+    public void setIsLoggedIn(boolean isLoggedin) {
+        editor = mPreferences.edit();
+        editor.putBoolean(this.isLoggedIn, isLoggedin);
+        editor.commit();
+    }
+
+    private String isCompanyVerified = "isCompanyVerified";
+
+    public boolean getIsCompanyVerified() {
+        return mPreferences.getBoolean(this.isCompanyVerified, false);
+    }
+
+    public void setIsCompanyVerified(boolean isCompanyVerified) {
+        editor = mPreferences.edit();
+        editor.putBoolean(this.isCompanyVerified, isCompanyVerified);
+        editor.commit();
+    }
+
+
+
+    String profileImage = "profileImage";
 
     public String getProfileImage() {
         return mPreferences.getString(this.profileImage, "");
@@ -32,7 +58,6 @@ public class LoginPreferences {
     public void setProfileImage(String profileImage) {
         editor = mPreferences.edit();
         editor.putString(this.profileImage, profileImage);
-
         editor.commit();
     }
 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightBlue"
+    tools:context="com.codecube.keshav.motif.UploadRequirementActivity">
+
+    <RelativeLayout
+        android:id="@+id/rly_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_simple"
+            android:focusable="true"
+            android:layout_margin="5dp"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_offer_image_details"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:padding="5dp"
+                />
+
+            <TextView
+                android:id="@+id/text_offer_id_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/text_offer_type_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextViewHeading"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/text_offer_name_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                />
+            <TextView
+                android:id="@+id/text_offer_desc_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                />
+
+      </LinearLayout>
+
+
+
+    </ScrollView>
+</LinearLayout>

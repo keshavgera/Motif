@@ -2,6 +2,7 @@ package fragments;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.codecube.keshav.motif.CorporateHomeFragmentDetailActivity;
+import com.codecube.keshav.motif.HomeActivity;
 import com.codecube.keshav.motif.HomeFragmentDetailActivity;
 import com.codecube.keshav.motif.R;
 
@@ -33,15 +34,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import MyPreference.LoginPreferences;
-import adapters.MessageAdapter;
 import adapters.UploadRequirementBrokerAdapter;
-import models.MessagePojo;
 import models.UploadRequirementBrokerPojo;
 import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
 
-public class HomeFragment extends Fragment {
+public class MyRequestsFragment extends Fragment {
     View convertView;
 
     ListView list_view_broker;
@@ -51,22 +50,25 @@ public class HomeFragment extends Fragment {
     ArrayList<UploadRequirementBrokerPojo> uploadRequirementBrokerPojoArrayList = new ArrayList<UploadRequirementBrokerPojo>();
     UploadRequirementBrokerAdapter uploadRequirementBrokerAdapter;
 
-
-
-    TextView tv_totalSale;
-    RelativeLayout relTot;
+//    TextView tv_totalSale;
+//    RelativeLayout relTot;
     SwipeRefreshLayout swipe_container_broker_list;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        convertView = inflater.inflate(R.layout.fragment_home, container, false);
-
+        convertView = inflater.inflate(R.layout.fragment_my_requests, container, false);
 
         list_view_broker = (ListView) convertView.findViewById(R.id.list_view_broker);
         img_no_data_broker_list = (ImageView) convertView.findViewById(R.id.img_no_data_broker_list);
+
+
+
+
+        if(!CommonMethod.isOnline(getActivity()))
+        {
+            CommonMethod.showAlert("Intenet Connectivity Failure",getActivity());
+        }
 
         swipe_container_broker_list = (SwipeRefreshLayout) convertView.findViewById(R.id.swipe_container_broker_list);
         // Setup refresh listener which triggers new data loading
@@ -113,8 +115,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-
         convertView.setFocusableInTouchMode(true);
         convertView.requestFocus();
         convertView.setOnKeyListener(new View.OnKeyListener() {
@@ -123,14 +123,33 @@ public class HomeFragment extends Fragment {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     // handle back button's click listener
 
+                if(LoginPreferences.getActiveInstance(getActivity()).getUserType().equals("Broker")) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        new android.support.v7.app.AlertDialog.Builder(getActivity())
+                                .setTitle("Are you sure you want to exit?")
+                                .setMessage("")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
 
+                                            @Override
+                                            public void onClick(DialogInterface dialog,
+                                                                int which) {
+                                                getActivity().finish();
+                                            }
+                                        }).setNegativeButton("No", null).show();
+                        return true;
+                    }
+                } else if(LoginPreferences.getActiveInstance(getActivity()).getUserType().equals("Employee")) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
 
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(intent);
                         getActivity().finish();
 
                         return true;
                     }
-
+                }
 
                     return true;
                 }
@@ -181,7 +200,8 @@ public class HomeFragment extends Fragment {
                     String responseMessage = object.getString("responseMessage");
                     String total;
                     long totalPrice = 0;
-                    Log.d("object", "" + object);
+//                    Log.e("response", "" + object.toString(2));
+
                     if (success.equals("200")) {
 
                         JSONObject jObject = null;
@@ -210,6 +230,10 @@ public class HomeFragment extends Fragment {
                                 uploadRequirementBrokerPojo.setDistanceFromOffice(jsonObject2.getString("distanceFromOffice"));
                                 uploadRequirementBrokerPojo.setSpecification(jsonObject2.getString("specification"));
                                 uploadRequirementBrokerPojo.setCity(jsonObject2.getString("city"));
+                                uploadRequirementBrokerPojo.setRequestId(jsonObject2.getString("reqId"));
+                                uploadRequirementBrokerPojo.setResponseStatus(jsonObject2.getString("response"));
+                                uploadRequirementBrokerPojo.setOfficeAddress(jsonObject2.getString("officeAddress"));
+                                uploadRequirementBrokerPojo.setVisitTime(jsonObject2.getString("visitTime"));
 
                                 uploadRequirementBrokerPojoArrayList.add(uploadRequirementBrokerPojo);
                             }
@@ -245,6 +269,7 @@ public class HomeFragment extends Fragment {
                 Log.e("after connection", "" + url);
                 client.addFormPart("mode", "3");  // TODO Get Mode
                 client.addFormPart("clientId", LoginPreferences.getActiveInstance(getActivity()).getClientId());
+                client.addFormPart("userId", LoginPreferences.getActiveInstance(getActivity()).getUserId());
 
                 Log.e("clientId","is --> " +  LoginPreferences.getActiveInstance(getActivity()).getClientId());
                 Log.d("client", client.toString());

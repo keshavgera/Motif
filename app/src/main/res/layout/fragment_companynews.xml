@@ -3,13 +3,14 @@
     android:id="@+id/swipe_container_news"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_listview">
+    android:background="@color/lightBlue">
+    <!--android:background="@color/background_listview"-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_listview">
-
+        android:background="@color/lightBlue">
+<!--background_listview-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -58,40 +58,35 @@
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items_corporate">
-        <item>Home</item>
-        <item>Upload Requirement</item>
-        <item>Messages</item>
-        <item>News</item>
-        <item>Notifications</item>
+        <item>Motif Leasing</item>
+        <item>MY Requests</item>
+        <item>Motif Support</item>
+        <item>Promotion And Offers</item>
+        <item>Shifting Guide</item>
         <item>Settings</item>
+        <item>Update Profile</item>
+        <item>Downloads</item>
+        <item>Rate Us</item>
+        <item>Share App</item>
         <item>Logout</item>
 
     </string-array>
-
+<!--<item>Upload Requirement</item>-->
     <string-array name="nav_drawer_items_broker">
-        <item>Home</item>
-        <item>Post Inventory</item>
-        <item>Messages</item>
-        <item>News</item>
-        <item>Notifications</item>
+        <!--<item>Motif Leasing</item>-->
+        <item>Received Requests</item>            <!--<item>Post Inventory</item>-->
+        <item>Motif Support</item>
+        <item>Promotion And Offers</item>
+        <item>Update Profile</item>
         <item>Settings</item>
+        <item>Downloads</item>
+        <item>Rate Us</item>
+        <item>Share App</item>
         <item>Logout</item>
 
     </string-array>
 
     <array name="nav_drawer_icons">
-
-        <!--  <item>@drawable/home_icon</item>
-        <item>@drawable/explore_icon</item>
-
-        <item>@drawable/manage_jobs</item>
-        <item>@drawable/manage_jobs</item>
-
-        <item>@drawable/manage_jobs</item>
-        <item>@drawable/notification_icon</item>
-
-        <item>@drawable/camera_icon</item>
-        <item>@drawable/setting_icon</item>-->
 
 
     </array>
@@ -115,5 +110,12 @@
     <string name="line2">With this App you can look to eFile your Income Tax Return your self or Let our CA efile your taxes and thus helping you claiming maximum tax refund lawfully.</string>
     <string name="line1">an e Return Intermediary with Department of Income Tax since 2009 can help you manage, save and eFile your Income Tax seamlessly with DIT. All Indian Tax Payers can use our online tool or app to calculate, manage and save income tax. We are one of the top leading Tax eFiling Companies in India helping over lakhs of Indian Tax Payers using our platform to manage and eFile their Income Tax since 2009.</string>
     <string name="an">an e Return Intermediary with Department of Income Tax since 2009 can help you manage, save and eFile your Income Tax seamlessly with DIT. All Indian Tax Payers can use our online tool or app to calculate, manage and save income tax. We are one of the top leading Tax eFiling Companies in India helping over lakhs of Indian Tax Payers using our platform to manage and eFile their Income Tax since 2009. </string>
+
+
+    <string name="rta_dialog_title">Rate this app</string>
+    <string name="rta_dialog_message">If you enjoy using this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thank you for your support!</string>
+    <string name="rta_dialog_ok">Rate now</string>
+    <string name="rta_dialog_cancel">Later</string>
+    <string name="rta_dialog_no">No, thanks</string>
 
 </resources>

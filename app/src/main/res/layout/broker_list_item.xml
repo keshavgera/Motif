@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,81 +12,13 @@
         android:orientation="vertical"
         android:background="@drawable/border_simple">
 
-        <!--<LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:padding="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Name "
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:id="@+id/tv_corporate_name_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text=""
-                style="@style/TextViewHeading" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:paddingLeft="10dp"
-                android:text="Mobile"
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:id="@+id/tv_corporate_mobile_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.1"
-                android:paddingLeft="10dp"
-                android:text=""
-                style="@style/TextViewSmallBlack" />
-
-        </LinearLayout>-->
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Date of shifting"
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:id="@+id/tv_date_of_shifting"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text=""
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Property"
-                style="@style/TextViewSmallBlack" />
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/tv_type_of_property"
@@ -92,42 +26,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
+                android:textColor="@color/black"
                 android:text=""
-                style="@style/TextViewSmallBlack" />
+                style="@style/TextViewHeading" />
+        </LinearLayout>
 
-        </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:padding="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Furnishing"
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:id="@+id/tv_furnishing"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text=""
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Rooms"
-                style="@style/TextViewSmallBlack" />
+            android:weightSum="2">
 
             <TextView
                 android:id="@+id/tv_rooms"
@@ -138,65 +48,6 @@
                 android:text=""
                 style="@style/TextViewSmallBlack" />
 
-        </LinearLayout>
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Price From"
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:id="@+id/tv_budget_rom"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text=""
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Price TO"
-                style="@style/TextViewSmallBlack" />
-
-            <TextView
-                android:id="@+id/tv_budget_to"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text=""
-                style="@style/TextViewSmallBlack" />
-
-        </LinearLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="4">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Location"
-                style="@style/TextViewSmallBlack" />
 
             <TextView
                 android:id="@+id/tv_preferred_location"
@@ -207,16 +58,18 @@
                 android:text=""
                 style="@style/TextViewSmallBlack" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Distance From Office"
-                style="@style/TextViewSmallBlack" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="1">
 
             <TextView
-                android:id="@+id/tv_distance_from_office"
+                android:id="@+id/tv_furnishing"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -225,7 +78,9 @@
                 style="@style/TextViewSmallBlack" />
 
         </LinearLayout>
-        <!--<LinearLayout
+
+        <LinearLayout
+            android:id="@+id/lly_response"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -236,41 +91,34 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Specification"
-                style="@style/TextViewSmallBlack" />
-
-
-            <TextView
-                android:id="@+id/tv_specification"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2.5"
                 android:paddingLeft="10dp"
                 android:text=""
                 style="@style/TextViewSmallBlack" />
 
             <TextView
+                android:id="@+id/tv_response_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:text="Specific Requirement"
+                android:layout_weight="1.2"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_gravity="center"
+                android:text="Responded"
+                android:textColor="@color/white"
+                android:background="@color/select"
                 style="@style/TextViewSmallBlack" />
 
-
             <TextView
-                android:id="@+id/tv_specific_requirement"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight=".3"
                 android:paddingLeft="10dp"
                 android:text=""
                 style="@style/TextViewSmallBlack" />
 
-        </LinearLayout>-->
-
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

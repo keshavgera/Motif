@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.codecube.keshav.motif.UploadRequirementActivity">
+
+    <RelativeLayout
+        android:id="@+id/rly_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/border_simple"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_first_name_sign_up"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top"
+                    android:hint="Name"
+                    android:inputType="textPersonName|textCapWords"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true"></EditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout1"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+
+                <EditText
+                    android:id="@+id/et_mobile_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif"
+                    android:hint="Mobile No"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout2"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_email_sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif"
+                    android:hint="Email Id"
+                    android:inputType="textNoSuggestions"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout3"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Show Password" />
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout3"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+
+                <EditText
+                    android:id="@+id/et_name_of_corporate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top"
+                    android:hint="Name Of Corporate"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true"></EditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <Spinner
+                android:id="@+id/spinner_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:inputType="textNoSuggestions"
+                android:paddingBottom="1dp"
+                android:paddingRight="5dp"
+                android:textSize="17sp" />
+
+            <!--<RelativeLayout
+                android:id="@+id/rel12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/select"
+                    android:text="Sign Up"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>-->
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

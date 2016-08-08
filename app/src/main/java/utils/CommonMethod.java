@@ -83,10 +83,10 @@ public class CommonMethod {
      */
 
 
-
     public static void myCustomAddPopup(final Activity activity) {
         new android.support.v7.app.AlertDialog.Builder(activity)
-                .setTitle("Are you sure you want to exit?")
+                .setTitle("Do you want to go back?")
+//                .setTitle("Are you sure you want to exit?")
                 .setMessage("")
                 .setCancelable(false)
                 .setPositiveButton("Yes",
@@ -101,23 +101,6 @@ public class CommonMethod {
                         }).setNegativeButton("No", null).show();
 
     }
-
-//    public static void myCustomAddPopupFragment(final Activity activity) {
-//        new android.support.v7.app.AlertDialog.Builder(activity)
-//                .setTitle("Are you sure you want to exit?")
-//                .setMessage("")
-//                .setCancelable(false)
-//                .setPositiveButton("Yes",
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog,
-//                                                int which) {
-//                                Intent i =new Intent(activity,HomeActivity.class);
-//                                activity.startActivity(i);
-//                            }
-//                        }).setNegativeButton("No", null).show();
-//    }
-
 
     public static void showAlert(String message, Activity context) {
 

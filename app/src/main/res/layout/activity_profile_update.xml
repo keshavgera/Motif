@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:background="@color/lightBlue"
+    tools:context="com.codecube.keshav.motif.UploadRequirementActivity">
+
+    <RelativeLayout
+        android:id="@+id/rly_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="@drawable/border_simple"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/lightBlue"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/update_profile_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/avatar_male"
+                    app:border_color="#FF000000" />
+
+            </RelativeLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_name_profile_update"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif"
+                    android:gravity="top"
+                    android:hint="Name"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:inputType="textPersonName|textCapWords"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true"></EditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout1"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+
+                <EditText
+                    android:id="@+id/et_mobile_profile_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif"
+                    android:hint="Mobile No"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout2"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_email_profile_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif"
+                    android:hint="Email Id"
+                    android:inputType="textNoSuggestions"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout3"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif"
+                    android:hint="Company Name"
+                    android:inputType="textNoSuggestions"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout4"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_company_addres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif"
+                    android:hint="Company Address"
+                    android:inputType="textNoSuggestions"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayout6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textInputLayout3"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_specialized_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif"
+                    android:hint="Specialized Area"
+                    android:inputType="textNoSuggestions"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:singleLine="true" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

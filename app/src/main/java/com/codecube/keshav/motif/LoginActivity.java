@@ -1,16 +1,27 @@
 package com.codecube.keshav.motif;
 
+import android.*;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -19,6 +30,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import MyPreference.LoginPreferences;
 import utils.ConstantValues;
@@ -33,6 +47,15 @@ public class LoginActivity extends AppCompatActivity {
 
     String username;
     String password;
+    TextView dont_have_an_account;
+    CheckBox check_box_password;
+
+    // TODO Permission
+
+    String TAG="PolicyDetailsFragment";
+    final int REQUEST_ID_MULTIPLE_PERMISSIONS=11;
+
+    // TODO Permission
 
     //TODO https://developers.google.com/cloud-messaging/android/client#sample-register
 
@@ -41,6 +64,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        // TODO Permission
+        checkAndRequestPermissions();               // TODO Permission
+
+
         Intent startRegistrationIntentService = new Intent(LoginActivity.this, RegistrationIntentService.class);
         //msgIntent.putExtra("userId", MyPreferences.getActiveInstance(HomeActivity.this).getuserId());
         startService(startRegistrationIntentService);
@@ -48,7 +76,24 @@ public class LoginActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPass = (EditText) findViewById(R.id.edtPass);
         loginSub = (Button) findViewById(R.id.loginSub);
+        dont_have_an_account = (TextView) findViewById(R.id.dont_have_an_account);
+        check_box_password = (CheckBox) findViewById(R.id.check_box_password);
 
+        check_box_password.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // checkbox status is changed from uncheck to checked.
+                if (isChecked) {
+                    // hide password
+                    Log.e("check_box_password","if ");
+                    edtPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    // show password
+                    Log.e("check_box_password","else ");
+                    edtPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
 
         loginSub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +108,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (checkValidation()) {
                     new LoginAsyncTask().execute();
                 }
+            }
+        });
+
+        dont_have_an_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, SignInActivity.class);
+                startActivity(i);
             }
         });
     }
@@ -93,6 +146,8 @@ public class LoginActivity extends AppCompatActivity {
         private String email;
         private String createdDate;
         private String updatedDate;
+        private String profileImageUrl;
+        private boolean isCompanyVerified;
 
         JSONObject jObject;
 
@@ -141,10 +196,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (code.equals("200"))
                     {
-                        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(i);
-                        finish();
-
                         clientId = jObject.getString("clientId");
                         userId = jObject.getString("userId");
                         userType = jObject.getString("UserType");
@@ -153,7 +204,8 @@ public class LoginActivity extends AppCompatActivity {
                         email = jObject.getString("email");
                         createdDate = jObject.getString("createdDate");
                         updatedDate = jObject.getString("updatedDate");
-
+                        profileImageUrl = jObject.getString("profileImageUrl");
+                        isCompanyVerified = jObject.getBoolean("companyStatus");
 
                         LoginPreferences.getActiveInstance(LoginActivity.this).setClientId(clientId);
                         LoginPreferences.getActiveInstance(LoginActivity.this).setUserId(userId);
@@ -163,7 +215,9 @@ public class LoginActivity extends AppCompatActivity {
                         LoginPreferences.getActiveInstance(LoginActivity.this).setEmail(email);
                         LoginPreferences.getActiveInstance(LoginActivity.this).setCreatedDate(createdDate);
                         LoginPreferences.getActiveInstance(LoginActivity.this).setUpdatedDate(updatedDate);
-
+                        LoginPreferences.getActiveInstance(LoginActivity.this).setProfileImage(profileImageUrl);
+                        LoginPreferences.getActiveInstance(LoginActivity.this).setIsLoggedIn(true);
+                        LoginPreferences.getActiveInstance(LoginActivity.this).setIsCompanyVerified(isCompanyVerified);
 
 Log.e("Login ","clientId  is -> " + LoginPreferences.getActiveInstance(LoginActivity.this).getClientId());
 Log.e("Login","userId  is -> " + LoginPreferences.getActiveInstance(LoginActivity.this).getUserId());
@@ -173,7 +227,18 @@ Log.e("Login","mobile is -> " + LoginPreferences.getActiveInstance(LoginActivity
 Log.e("Login","email is ->" + LoginPreferences.getActiveInstance(LoginActivity.this).getEmail());
 Log.e("Login","createdDate is -> " + LoginPreferences.getActiveInstance(LoginActivity.this).getCreatedDate());
 Log.e("Login","updatedDate is -> " + LoginPreferences.getActiveInstance(LoginActivity.this).getUpdatedDate());
+Log.e("Login","IsLoggedIn is -> " + LoginPreferences.getActiveInstance(LoginActivity.this).getIsLoggedIn());
+Log.e("Login","profileImage is -> " + LoginPreferences.getActiveInstance(LoginActivity.this).getProfileImage());
+Log.e("Login","isCompanyVerified is -> " + LoginPreferences.getActiveInstance(LoginActivity.this).getIsCompanyVerified());
 
+
+                        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+//                        profileImageUrl = jObject.getString("profileImageUrl");
+                        Log.e("profileImageUrl","is Login--> " +profileImageUrl);
+//                        i.putExtra("profileImageUrl",profileImageUrl);
+
+                        startActivity(i);
+                        finish();
 
                     } else if (code.equals("0")) {
                         Toast.makeText(getApplicationContext(),
@@ -194,5 +259,100 @@ Log.e("Login","updatedDate is -> " + LoginPreferences.getActiveInstance(LoginAct
         }
     }
 
+    //TODO PERMISSION
+    private boolean checkAndRequestPermissions() {
+
+        int readCall = ContextCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        int locationPermission = ContextCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (locationPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+
+        if (readCall != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(LoginActivity.this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults)
+    {
+        Log.d(TAG, "Permission callback called-------");
+
+        switch (requestCode)
+        {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS:
+            {
+                Map<String, Integer> perms = new HashMap<>();
+                // Initialize the map with both permissions
+
+                perms.put(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(android.Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                // Fill with actual results from user
+                if (grantResults.length > 0)
+                {
+                    for (int i = 0; i < permissions.length; i++)
+                        perms.put(permissions[i], grantResults[i]);
+                    // Check for both permissions
+                    if (perms.get(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                            && perms.get(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        Log.d(TAG, "sms & location services permission granted");
+                        // process the normal flow
+                        //else any one or both the permissions are not granted
+                    } else {
+                        Log.d(TAG, "Some permissions are not granted ask again ");
+                        //permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
+//                        // shouldShowRequestPermissionRationale will return true
+                        //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, android.Manifest.permission.SEND_SMS) || ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                            showDialogOK("SMS and Location Services Permission required for this app",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            switch (which) {
+                                                case DialogInterface.BUTTON_POSITIVE:
+                                                    checkAndRequestPermissions();
+                                                    break;
+                                                case DialogInterface.BUTTON_NEGATIVE:
+                                                    // proceed with logic by disabling the related features or quit the app.
+                                                    break;
+                                            }
+                                        }
+                                    });
+                        }
+                        //permission is denied (and never ask again is  checked)
+                        //shouldShowRequestPermissionRationale will return false
+                        else {
+                            Toast.makeText(LoginActivity.this, "Go to settings and enable permissions", Toast.LENGTH_LONG)
+                                    .show();
+                            //                            //proceed with logic by disabling the related features or quit the app.
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void showDialogOK(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(LoginActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show();
+    }
+
+    //TODO PERMISSION
 
 }

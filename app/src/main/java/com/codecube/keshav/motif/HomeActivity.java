@@ -10,14 +10,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,8 +25,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -45,25 +40,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 import MyPreference.LoginPreferences;
 import adapters.NavDrawerListAdapter;
-import fragments.CompanyNews;
-import fragments.CorporateHomeFragment;
-import fragments.HomeFragment;
-import fragments.MessageFragment;
+import fragments.DisplayFragment;
+import fragments.DownloadListFragment;
+import fragments.MyRequestsFragment;
 import fragments.NewsFragment;
-import fragments.NotificationFragment;
 import fragments.SettingFragment;
 import models.NavDrawerItem;
+import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
 import utils.ImageLoader1;
@@ -85,10 +73,7 @@ public class HomeActivity extends ActionBarActivity
     private ImageLoader1 imgload;
     private ImageLoader imgLoader;
 
-
     // TODO CAMERA IMAGE
-
-
 
     private ResponseReceiver receiver;
     public static ImageView frow_logo;
@@ -105,6 +90,8 @@ public class HomeActivity extends ActionBarActivity
     private RelativeLayout mDrawerRelativeLayout;
     private ListView mDrawerList;
 //    private ActionBarDrawerToggle mDrawerToggle;
+
+    String profileImageUrl;
     private Fragment mFragment = null;
 
     TextView username;
@@ -121,18 +108,31 @@ public class HomeActivity extends ActionBarActivity
         imgload = new ImageLoader1(HomeActivity.this);
 
 
+        if(!LoginPreferences.getActiveInstance(HomeActivity.this).getIsCompanyVerified()){
+            CommonMethod.showAlert("Company Not Verified Yet ",HomeActivity.this);
+        }
+
+//        profileImageUrl=getIntent().getStringExtra("profileImageUrl");
+
+        profileImageUrl=LoginPreferences.getActiveInstance(HomeActivity.this).getProfileImage();
+
+
+        Log.e("profileImageUrl","is Home ac--> " +profileImageUrl);
         final LayoutInflater mInflater = (LayoutInflater) HomeActivity.this
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         final View convertView = mInflater.inflate(R.layout.header, null);
 
         username=(TextView) convertView.findViewById(R.id.username);
         profile_image=(ImageView) convertView.findViewById(R.id.profile_image);
+//        imgload.DisplayImage(HomeActivity.this, LoginPreferences.getActiveInstance(HomeActivity.this).getProfileImage(), profile_image);
+        imgload.DisplayImage(HomeActivity.this, profileImageUrl, profile_image);
+
 
         login=getIntent().getBooleanExtra("login",false);
 
-        if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Corporate")) {
+        if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Employee")) {
             mOptionMenu = getResources().getStringArray(R.array.nav_drawer_items_corporate);
-        }else{
+        }else if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Broker")) {
             mOptionMenu = getResources().getStringArray(R.array.nav_drawer_items_broker);
         }
 
@@ -155,7 +155,7 @@ public class HomeActivity extends ActionBarActivity
             }
         });
 
-        if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Corporate")) {
+        if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Employee")) {
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[0], navMenuIcons.getResourceId(0, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[1], navMenuIcons.getResourceId(1, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[2], navMenuIcons.getResourceId(2, -1)));
@@ -163,7 +163,11 @@ public class HomeActivity extends ActionBarActivity
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[4], navMenuIcons.getResourceId(4, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[5], navMenuIcons.getResourceId(5, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[6], navMenuIcons.getResourceId(6, -1)));
-        }else{
+            navDrawerItems.add(new NavDrawerItem(mOptionMenu[7], navMenuIcons.getResourceId(7, -1)));
+            navDrawerItems.add(new NavDrawerItem(mOptionMenu[8], navMenuIcons.getResourceId(8, -1)));
+            navDrawerItems.add(new NavDrawerItem(mOptionMenu[9], navMenuIcons.getResourceId(9, -1)));
+            navDrawerItems.add(new NavDrawerItem(mOptionMenu[10], navMenuIcons.getResourceId(10, -1)));
+        }else if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Broker")) {
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[0], navMenuIcons.getResourceId(0, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[1], navMenuIcons.getResourceId(1, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[2], navMenuIcons.getResourceId(2, -1)));
@@ -171,6 +175,8 @@ public class HomeActivity extends ActionBarActivity
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[4], navMenuIcons.getResourceId(4, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[5], navMenuIcons.getResourceId(5, -1)));
             navDrawerItems.add(new NavDrawerItem(mOptionMenu[6], navMenuIcons.getResourceId(6, -1)));
+            navDrawerItems.add(new NavDrawerItem(mOptionMenu[7], navMenuIcons.getResourceId(7, -1)));
+            navDrawerItems.add(new NavDrawerItem(mOptionMenu[8], navMenuIcons.getResourceId(8, -1)));
         }
 
 
@@ -195,28 +201,30 @@ public class HomeActivity extends ActionBarActivity
                                                    pos = position - 1;
 
 
-                    if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Corporate"))
+                    if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Employee"))
                     {
                         Log.e("HomeActivity is","Corporate pos >" +pos);
                         switch (pos) {
 
                             case 0:
-                                toolbartitle.setText("Home");
+                                toolbartitle.setText("Motif Leasing");
                                 frow_logo.setVisibility(View.GONE);
-                                mFragment = new CorporateHomeFragment();
+                                //mFragment = new CorporateHomeFragment();
+                                mFragment = new DisplayFragment();
                                 break;
-
                             case 1:
-                                toolbartitle.setText("Upload Requirement");
+                                toolbartitle.setText("My Requests");
                                 frow_logo.setVisibility(View.GONE);
-                                Intent i = new Intent(HomeActivity.this, UploadRequirementActivity.class);
-                                startActivity(i);
-                                finish();
 
+                                mFragment = new MyRequestsFragment();
+
+//                                Intent myRequests = new Intent(HomeActivity.this, MyRequestActivity.class);
+//                                startActivity(myRequests);
+//                                finish();
                                 break;
 
                             case 2:
-                                toolbartitle.setText("Messages");
+                                toolbartitle.setText("Motif Support");
                                 frow_logo.setVisibility(View.GONE);
                                 Intent msg = new Intent(HomeActivity.this, MessageActivity.class);
                                 startActivity(msg);
@@ -226,13 +234,13 @@ public class HomeActivity extends ActionBarActivity
                             case 3:
                                 mFragment = new NewsFragment();
                                 frow_logo.setVisibility(View.GONE);
-                                toolbartitle.setText("News");
+                                toolbartitle.setText("Promotion And Offers");
                                 break;
 
                             case 4:
-                                mFragment = new NotificationFragment();
+//                                mFragment = new NotificationFragment();
                                 frow_logo.setVisibility(View.GONE);
-                                toolbartitle.setText("Notifications");
+//                                toolbartitle.setText("Shifting Guide");
                                 break;
 
                             case 5:
@@ -241,6 +249,34 @@ public class HomeActivity extends ActionBarActivity
                                 toolbartitle.setText("Settings");
                                 break;
                             case 6:
+                                frow_logo.setVisibility(View.GONE);
+                                toolbartitle.setText("Update Profile");
+                                Intent updateProfile = new Intent(HomeActivity.this, ProfileUpdateActivity.class);
+                                startActivity(updateProfile);
+                                finish();
+                                break;
+                            case 7:
+                                mFragment = new DownloadListFragment();
+                                frow_logo.setVisibility(View.GONE);
+                                toolbartitle.setText("Downloads");
+                                break;
+                            case 8:
+                                frow_logo.setVisibility(View.GONE);
+                                toolbartitle.setText("Rate Us");
+                                Intent rate = new Intent(HomeActivity.this, RateThisAppActivity.class);
+                                startActivity(rate);
+                                finish();
+                                break;
+                            case 9:
+                                frow_logo.setVisibility(View.GONE);
+                                Intent sendIntent = new Intent();
+                                sendIntent.setAction(Intent.ACTION_SEND);
+                                sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I would like to share this app with you");
+                                sendIntent.setType("text/plain");
+                                startActivity(Intent.createChooser(sendIntent,""));
+                              //  finish();
+                                break;
+                            case 10:
                                 frow_logo.setVisibility(View.GONE);
                                 toolbartitle.setText("Logout");
                                 Intent logout = new Intent(HomeActivity.this, LogoutActivity.class);
@@ -252,23 +288,27 @@ public class HomeActivity extends ActionBarActivity
                         Log.e("HomeActivity is", "broker pos >" + pos);
 
                         switch (pos) {
+//                            case 0:
+//                                toolbartitle.setText("Motif Leasing");
+//                                frow_logo.setVisibility(View.GONE);
+//                                mFragment = new DisplayFragment();
+//                                break;
+
                             case 0:
-                                toolbartitle.setText("Home");
+                                toolbartitle.setText("Received Requests");
                                 frow_logo.setVisibility(View.GONE);
-                                mFragment = new HomeFragment();
-
+                                mFragment = new MyRequestsFragment();
                                 break;
+//                            case 2:
+//                                toolbartitle.setText("Post Inventory");
+//                                frow_logo.setVisibility(View.GONE);
+//                                Intent intent = new Intent(HomeActivity.this, PostInventoryActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                                break;
+
                             case 1:
-                                toolbartitle.setText("Post Inventory");
-                                frow_logo.setVisibility(View.GONE);
-                                Intent intent = new Intent(HomeActivity.this, PostInventoryActivity.class);
-                                startActivity(intent);
-                                finish();
-
-                                break;
-
-                            case 2:
-                                toolbartitle.setText("Messages");
+                                toolbartitle.setText("Motif Support");
                                 frow_logo.setVisibility(View.GONE);
                                 Intent msg = new Intent(HomeActivity.this, MessageActivity.class);
                                 startActivity(msg);
@@ -276,25 +316,49 @@ public class HomeActivity extends ActionBarActivity
 
                                 break;
 
-                            case 3:
+                            case 2:
 
                                 mFragment = new NewsFragment();
                                 frow_logo.setVisibility(View.GONE);
-                                toolbartitle.setText("News");
+                                toolbartitle.setText("Promotion And Offers");
                                 break;
 
+                            case 3:
+                            frow_logo.setVisibility(View.GONE);
+                            toolbartitle.setText("Update Profile");
+                            Intent updateProfile = new Intent(HomeActivity.this, ProfileUpdateActivity.class);
+                            startActivity(updateProfile);
+                            finish();
+                            break;
                             case 4:
-                                mFragment = new NotificationFragment();
-                                frow_logo.setVisibility(View.GONE);
-                                toolbartitle.setText("Notifications");
-                                break;
-
-                            case 5:
                                 mFragment = new SettingFragment();
                                 frow_logo.setVisibility(View.GONE);
                                 toolbartitle.setText("Settings");
                                 break;
+                            case 5:
+                                mFragment = new DownloadListFragment();
+                                frow_logo.setVisibility(View.GONE);
+                                toolbartitle.setText("Downloads");
+                                break;
+
                             case 6:
+                                frow_logo.setVisibility(View.GONE);
+                                toolbartitle.setText("Rate Us");
+                                Intent rate = new Intent(HomeActivity.this, RateThisAppActivity.class);
+                                startActivity(rate);
+                                finish();
+                                break;
+                            case 7:
+                                frow_logo.setVisibility(View.GONE);
+                                Intent sendIntent = new Intent();
+                                sendIntent.setAction(Intent.ACTION_SEND);
+                                sendIntent.putExtra(Intent.EXTRA_TEXT, "Hi, I would like to share this app with you");
+                                sendIntent.setType("text/plain");
+                                startActivity(Intent.createChooser(sendIntent,""));
+                             //   finish();
+
+                                break;
+                            case 8:
                                 frow_logo.setVisibility(View.GONE);
                                 toolbartitle.setText("Logout");
                                 Intent logout = new Intent(HomeActivity.this, LogoutActivity.class);
@@ -314,17 +378,6 @@ public class HomeActivity extends ActionBarActivity
                                            });
 
 
-        if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Corporate"))
-        {
-            mFragmentManager = getSupportFragmentManager();
-            mFragmentTransaction = mFragmentManager.beginTransaction();
-            mFragmentTransaction.replace(R.id.containerView,new CorporateHomeFragment()).commit();
-        }else if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Broker")) {
-            mFragmentManager = getSupportFragmentManager();
-            mFragmentTransaction = mFragmentManager.beginTransaction();
-            mFragmentTransaction.replace(R.id.containerView,new HomeFragment()).commit();
-        }
-
         IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
 
@@ -333,7 +386,22 @@ public class HomeActivity extends ActionBarActivity
         setSupportActionBar(toolbar);
         toolbartitle=(TextView)findViewById(R.id.toolbar_title);
         frow_logo=(ImageView)findViewById(R.id.hederimage);
-        toolbartitle.setText("Home");
+
+        if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Employee"))
+        {
+            toolbartitle.setText("Motif Leasing");
+            mFragmentManager = getSupportFragmentManager();
+            mFragmentTransaction = mFragmentManager.beginTransaction();
+            mFragmentTransaction.replace(R.id.containerView,new DisplayFragment()).commit();
+        }else if(LoginPreferences.getActiveInstance(HomeActivity.this).getUserType().equals("Broker")) {
+
+            toolbartitle.setText("Received Requests");
+            mFragmentManager = getSupportFragmentManager();
+            mFragmentTransaction = mFragmentManager.beginTransaction();
+            mFragmentTransaction.replace(R.id.containerView,new MyRequestsFragment()).commit();
+        }
+
+
 
         my_font = Typeface.createFromAsset(HomeActivity.this.getAssets(), "fonts/my_font.ttf");
 
@@ -376,10 +444,24 @@ public class HomeActivity extends ActionBarActivity
     }
 
 
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        HomeActivity.this.finish();
+        Log.d("Home Activity", "onBackPressed Called");
+
+        new android.support.v7.app.AlertDialog.Builder(HomeActivity.this)
+                .setTitle("Are you sure you want to exit?")
+                .setMessage("")
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                HomeActivity.this.finish();
+                            }
+                        }).setNegativeButton("No", null).show();
     }
 
     private void selectImage() {
@@ -477,9 +559,6 @@ public class HomeActivity extends ActionBarActivity
         private String response;
         private String ProfileImage;
 
-        JSONObject jObject;
-
-
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
@@ -517,15 +596,15 @@ public class HomeActivity extends ActionBarActivity
                 String responseMessage = object.getString("responseMessage");
                 if (success.equals("200")) {
                     try {
-                        ProfileImage = object.getString("image");
+                        ProfileImage = object.getString("profileImage");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     Log.e("imageurl", "1: " + ProfileImage);
-                    LoginPreferences.getActiveInstance(HomeActivity.this).setProfileImage(ProfileImage);
+                   LoginPreferences.getActiveInstance(HomeActivity.this).setProfileImage(ProfileImage);
+//                    imgload.DisplayImage(HomeActivity.this, ProfileImage, profile_image);   // img_Detail
 
-                    imgload.DisplayImage(HomeActivity.this, ProfileImage, profile_image);   // img_Detail
-//                    imgload.DisplayImage(HomeActivity.this, ProfileImage, img_Main);
+                    imgload.DisplayImage(HomeActivity.this, ProfileImage, profile_image);
 
                     Toast.makeText(HomeActivity.this, responseMessage, Toast.LENGTH_SHORT).show();
                     /*Intent in = new Intent(getActivity(), HomeActivity.class);
@@ -540,7 +619,6 @@ public class HomeActivity extends ActionBarActivity
 
         private String callService() {
             String url = ConstantValues.IMAGEUPLOADProfile;
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
             HttpClient client = new HttpClient(url);
             Log.e("before connection", "" + url);
 
@@ -549,15 +627,12 @@ public class HomeActivity extends ActionBarActivity
 
                 Log.e("after connection", "" + url);
 
-                client.addFormPart("loginKey","CCD@anu_js8");
-                client.addFormPart("ouId", "113");
-                client.addFormPart("buId", "10");
+                client.addFormPart("mode","5");
+                client.addFormPart("clientId",LoginPreferences.getActiveInstance(HomeActivity.this).getClientId());
+                client.addFormPart("NuserId",LoginPreferences.getActiveInstance(HomeActivity.this).getUserId());
+                client.addFilePart("profileImage", imageName + ".jpg", mData);
 
-                client.addFilePart("image", imageName + ".jpg", mData);
                 Log.e("imageeeeeeeee", imageName + ".jpg" + ", " + mData);
-
-
-                // Log.d("latitude, longitude", latitude + "," + longitude);
 
                 client.finishMultipart();
 

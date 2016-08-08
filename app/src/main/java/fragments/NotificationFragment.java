@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 import adapters.NotificationAdapter;
 import models.NotificationData;
+import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.CustomHttpClient;
 
@@ -48,7 +49,7 @@ public class NotificationFragment extends Fragment {
     public NotificationFragment()
 	{
 
-}
+    }
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +63,14 @@ public class NotificationFragment extends Fragment {
 		swipe_container_notification = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container_notification);
 
 		notifyList.clear();
-		new MyTask().execute();
+
+
+		if(!CommonMethod.isOnline(getActivity()))
+		{
+			CommonMethod.showAlert("Intenet Connectivity Failure",getActivity());
+		}else{
+			new MyTask().execute();
+		}
 
 		swipe_container_notification.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
@@ -126,34 +134,6 @@ public class NotificationFragment extends Fragment {
 
 		return rootView;
     }
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.emptymenu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}*/
-	
-	@Override
-	public void onPrepareOptionsMenu(Menu menu) {
-		
-//		menu.findItem(R.id.dateBtn).setVisible(false);
-//		menu.findItem(R.id.punchInPJP).setVisible(false);
-//		menu.findItem(R.id.punchOutPJP).setVisible(false);
-//		menu.findItem(R.id.punchIn).setVisible(false);
-//		menu.findItem(R.id.punchOut).setVisible(false);
-
-	}
 
 	public class MyTask extends AsyncTask<String, Void, String> {
 		ProgressDialog pDailog;

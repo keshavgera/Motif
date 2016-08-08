@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightBlue"
+    tools:context="com.codecube.keshav.motif.UploadRequirementActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:visibility="gone"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_my_offers"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_weight="0.7"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:text="Offers"
+                android:textColor="@drawable/selector_button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_weight="0.7"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:text="Updates"
+                android:textColor="@drawable/selector_button" />
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/horizontal_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:layout_height="150dp" />
+
+        <include layout="@layout/item_divider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/box_layout_margin_right"
+            android:layout_marginTop="5dp"
+            android:padding="@dimen/text_input_padding"
+            android:text="Type of Property"
+            android:textColor="#000000" />
+
+            <LinearLayout
+                android:id="@+id/ln_type_of_property"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <LinearLayout
+                    android:id="@+id/lny_guest_house"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:src="@drawable/guest_house" />
+
+                    <TextView
+                        android:id="@+id/guest_house"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:text="Guest House"
+                        android:textColor="@drawable/selector_button" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lny_house"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:src="@drawable/building_floor" />
+
+                    <TextView
+                        android:id="@+id/house"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:text="Builder Floor"
+                        android:textColor="@drawable/selector_button" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lny_pg"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/pg" />
+
+                    <TextView
+                        android:id="@+id/pg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:text="PG"
+                        android:textColor="@drawable/selector_button" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lny_click_house"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+
+                <LinearLayout
+                    android:id="@+id/lny_apartments"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/apartment" />
+
+                    <TextView
+                        android:id="@+id/apartments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:text="Apartments"
+                        android:textColor="@drawable/selector_button" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lny_villa"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="10dp"
+                        android:src="@drawable/villa" />
+
+                    <TextView
+                        android:id="@+id/villa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp"
+                        android:text="Villa"
+                        android:textColor="@drawable/selector_button" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        <include layout="@layout/item_divider" />
+
+        <Button
+            android:id="@+id/button_my_request"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="My Requests"
+            android:textColor="@drawable/selector_button" />
+
+        <include layout="@layout/item_divider" />
+
+
+
+       <!-- <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="7dp"
+            android:paddingLeft="20dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="Offers " />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="right"
+                android:text="View All"
+                android:textColor="@color/Blue" />
+        </LinearLayout>-->
+
+    </LinearLayout>
+
+  <!--  <android.support.v7.widget.RecyclerView
+        android:id="@+id/horizontal_recycler_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />-->
+</LinearLayout>

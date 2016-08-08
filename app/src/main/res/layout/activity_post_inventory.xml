@@ -270,18 +270,6 @@
 
                 </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="@dimen/box_layout_margin_right"
-                android:layout_marginTop="5dp"
-                android:paddingTop="@dimen/text_input_padding"
-                android:paddingLeft="@dimen/text_input_padding"
-                android:paddingRight="@dimen/text_input_padding"
-                android:text="Select a City"
-                android:textColor="#000000" />
-
             <Spinner
                 android:id="@+id/spinner_city_inventory"
                 android:layout_width="match_parent"
@@ -406,8 +394,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="@dimen/box_layout_margin_left"
                 android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginLeft="5dp"
                 android:fadingEdge="none"
                 android:padding="@dimen/text_input_padding"
                 android:scrollbars="none">
@@ -421,7 +409,7 @@
 
                     <Button
                         android:id="@+id/ground_floor"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -430,7 +418,7 @@
 
                     <Button
                         android:id="@+id/floor_one"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -439,7 +427,7 @@
 
                     <Button
                         android:id="@+id/floor_two"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -448,7 +436,7 @@
 
                     <Button
                         android:id="@+id/floor_three"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -457,7 +445,7 @@
 
                     <Button
                         android:id="@+id/floor_four"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -465,7 +453,7 @@
                         android:text="4" />
                     <Button
                         android:id="@+id/floor_five"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -473,7 +461,7 @@
                         android:text="5" />
                     <Button
                         android:id="@+id/floor_six"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -481,7 +469,7 @@
                         android:text="6" />
                     <Button
                         android:id="@+id/floor_seven"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -489,7 +477,7 @@
                         android:text="7" />
                     <Button
                         android:id="@+id/floor_eight"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -497,7 +485,7 @@
                         android:text="8" />
                     <Button
                         android:id="@+id/floor_nine"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -505,7 +493,7 @@
                         android:text="9" />
                     <Button
                         android:id="@+id/floor_ten"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -513,7 +501,7 @@
                         android:text="10" />
                     <Button
                         android:id="@+id/floor_eleven"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -522,7 +510,7 @@
 
                     <Button
                         android:id="@+id/floor_twelve"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -530,7 +518,7 @@
                         android:text="12" />
                     <Button
                         android:id="@+id/floor_thirten"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -538,7 +526,7 @@
                         android:text="13" />
                     <Button
                         android:id="@+id/floor_fourten"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:text="14"
@@ -547,7 +535,7 @@
                         />
                     <Button
                         android:id="@+id/floor_fiften"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@drawable/selector_button"
@@ -555,7 +543,7 @@
                         android:text="15" />
                     <Button
                         android:id="@+id/floor_sixten"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -563,7 +551,7 @@
                         android:text="16" />
                     <Button
                         android:id="@+id/floor_seventen"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -571,7 +559,7 @@
                         android:text="17" />
                     <Button
                         android:id="@+id/floor_eighteen"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -579,7 +567,7 @@
                         android:text="18" />
                     <Button
                         android:id="@+id/floor_ninteen"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -587,7 +575,7 @@
                         android:text="19" />
                     <Button
                         android:id="@+id/floor_twenty"
-                        android:layout_width="0dp"
+                        android:layout_width="47dp"
                         android:layout_weight="1"
                         android:textColor="@drawable/selector_button"
                         android:background="@color/deselect"
@@ -654,33 +642,6 @@
 
             </android.support.design.widget.TextInputLayout>
 
-<!--
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_specific_criteria"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/box_layout_margin_left"
-                android:layout_marginRight="@dimen/box_layout_margin_right"
-                android:layout_marginTop="8dp"
-                android:padding="@dimen/text_input_padding">
-
-                <EditText
-                    android:id="@+id/et_specific_criteria"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:ems="10"
-                    android:fontFamily="sans-serif"
-                    android:gravity="top"
-                    android:hint="Specific Criteria"
-                    android:inputType="text"
-                    android:paddingLeft="@dimen/edit_input_padding"
-                    android:paddingRight="@dimen/edit_input_padding"
-                    android:paddingTop="@dimen/edit_input_padding"
-                    android:singleLine="true"></EditText>
-
-            </android.support.design.widget.TextInputLayout>
--->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -65,7 +65,7 @@ public class NotificationAdapter extends BaseAdapter {
             holder.txtAlert = (TextView) view.findViewById(R.id.listAlert);
             holder.notification_title = (TextView) view.findViewById(R.id.notification_title);
             holder.txtDate = (TextView) view.findViewById(R.id.listDate);
-            holder.iv_notImage = (ImageView) view.findViewById(R.id.iv_notImage);
+/*            holder.iv_notImage = (ImageView) view.findViewById(R.id.iv_notImage);*/
 
             view.setTag(holder);
         } else {
@@ -86,7 +86,7 @@ public class NotificationAdapter extends BaseAdapter {
         holder.txtAlert.setText(notifyDatas.get(arg0).getNotAlert());
         holder.notification_title.setText(notifyDatas.get(arg0).getNotification_title());
         holder.txtDate.setText(CommonMethod.DateFormatApp(notifyDatas.get(arg0).getNotDate()));
-        imgload.DisplayImage(ctxt, notifyDatas.get(arg0).getImage(), holder.iv_notImage);
+//        imgload.DisplayImage(ctxt, notifyDatas.get(arg0).getImage(), holder.iv_notImage);
 
         return view;
     }
@@ -96,33 +96,4 @@ public class NotificationAdapter extends BaseAdapter {
         ImageView iv_notImage;
     }
 
-    private String getDiference(long timeDifferenceMilliseconds) {
-
-        long diffSeconds = timeDifferenceMilliseconds / 1000;
-        long diffMinutes = timeDifferenceMilliseconds / (60 * 1000);
-        long diffHours = timeDifferenceMilliseconds / (60 * 60 * 1000);
-        long diffDays = timeDifferenceMilliseconds / (60 * 60 * 1000 * 24);
-        long diffWeeks = timeDifferenceMilliseconds / (60 * 60 * 1000 * 24 * 7);
-        long diffMonths = (long) (timeDifferenceMilliseconds / (60 * 60 * 1000 * 24 * 30.41666666));
-        long diffYears = (long) (timeDifferenceMilliseconds / (60 * 60 * 1000 * 24 * 365));
-
-        if (diffSeconds < 1) {
-            return "less than a second";
-        } else if (diffMinutes < 1) {
-            return diffSeconds + " seconds";
-        } else if (diffHours < 1) {
-            return diffMinutes + " minutes";
-        } else if (diffDays < 1) {
-            return diffHours + " hours";
-        } else if (diffWeeks < 1) {
-            return diffDays + " days";
-        } else if (diffMonths < 1) {
-            return diffWeeks + " weeks";
-        } else if (diffYears < 1) {
-            return diffMonths + " months";
-        } else {
-            return diffYears + " years";
-
-        }
-    }
 }

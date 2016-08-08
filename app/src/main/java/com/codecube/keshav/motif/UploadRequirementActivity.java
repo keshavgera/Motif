@@ -3,9 +3,11 @@ package com.codecube.keshav.motif;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,49 +36,66 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import MyPreference.LoginPreferences;
 import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
+import utils.MultiSelectionSpinner;
 
-public class UploadRequirementActivity extends AppCompatActivity
+public class UploadRequirementActivity extends AppCompatActivity implements MultiSelectionSpinner.OnMultipleItemsSelectedListener
 {
-    HorizontalScrollView horizontal_type_of_property;
     EditText et_date_of_shifting;
-    EditText et_preferred_location;
     EditText et_specification;
+    EditText et_office_address;
 
-    TextView house, apartments, pg, villa, guest_house;
     Button row, fully, semi;
     Button room_one, room_two, room_three, room_four, room_five, room_five_plus;
+    Button bed_one,bed_two,bed_three,bed_four,bed_five,bed_five_plus;
 
-    String typeOfProperty;
     String typeOfFurnishing;
     String roomNumber;
 
     Toolbar toolbar;
     TextView toolbarTitle;
+    TextView tv_lly_bed_pg_guest_house;
+    TextView tv_facility_in_pg;
+    TextView tv_furnishing_in_villa_apart_house;
+    LinearLayout lly_bed_pg_guest_house;
 
+    TextView tv_lly_rooms_house_apartment_villa;
+    LinearLayout lly_rooms_house_apartment_villa;
+    LinearLayout button_furnishing_in_villa_apart_house;
 
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH);
     int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
     String serverSendDateOfShifting;
     String preferredLocation;
-    int priceMinimum = 3000;
-    int priceMaximum = 100000;
+    int priceMinimum;
+    int priceMaximum;
 
     String specification;
     String distanceFromOffice;
+    String spinnerVisitTime;
     String selectCity;
+    String typeOfPropertyTitle;
+    String officeAddress;
+    int startValue;
+    int endValue;
+
+    MultiSelectionSpinner multiSelectionSpinnerFacilityInPG;
+
 
     private AutoCompleteTextView auto_preferred_location;
 
     Spinner spinner_distance_from_office;
+    TextView tv_visit_time;
+    Spinner spinner_visit_time;
+
     Spinner spinner_city;
 
     ArrayAdapter<String> cityAdapter;
@@ -83,9 +103,15 @@ public class UploadRequirementActivity extends AppCompatActivity
     ArrayList<String> auto_preferred_locationArrayList = new ArrayList<>();
     ArrayList<String> cityArrayList = new ArrayList<>();
     ArrayList<String> auto_distance_from_officeArrayList = new ArrayList<>();
+    ArrayList<String> visitTimeArrayList = new ArrayList<>();
 
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
-    LinearLayout lny_guest_house,lny_apartments,lny_house,lny_pg,lny_villa;
+    int server;
+    EditText et;
+
+    String[]  AssignedToArray = {"AC", "Wifi", "TV", "Geyser", "Meals" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +124,41 @@ public class UploadRequirementActivity extends AppCompatActivity
         auto_distance_from_officeArrayList.add("Within 5 Km");
         auto_distance_from_officeArrayList.add("Upto 10 km");
 
+        visitTimeArrayList.add("Select a time");
+        visitTimeArrayList.add("9 AM - 11 AM");
+        visitTimeArrayList.add("11 AM - 1 PM");
+        visitTimeArrayList.add("1 PM -  3 PM");
+        visitTimeArrayList.add("3 PM - 5 PM");
+        visitTimeArrayList.add("5 PM - 7 PM");
+        visitTimeArrayList.add("7 PM - 9 PM");
 
+        if (!CommonMethod.isOnline(UploadRequirementActivity.this)) {
+            CommonMethod.showAlert("Intenet Connectivity Failure", UploadRequirementActivity.this);
+        }
 
-        horizontal_type_of_property = (HorizontalScrollView) findViewById(R.id.horizontal_type_of_property);
 
         et_date_of_shifting = (EditText) findViewById(R.id.et_date_of_shifting);
+        et = (EditText) findViewById(R.id.et);
+        et_office_address = (EditText) findViewById(R.id.et_office_address);
+        final Button btn = (Button) findViewById(R.id.btn);
+        final TextView tv = (TextView) findViewById(R.id.tv);
+        tv_lly_bed_pg_guest_house= (TextView) findViewById(R.id.tv_lly_bed_pg_guest_house);
+        tv_facility_in_pg= (TextView) findViewById(R.id.tv_facility_in_pg);
+        tv_furnishing_in_villa_apart_house= (TextView) findViewById(R.id.tv_furnishing_in_villa_apart_house);
+        lly_bed_pg_guest_house= (LinearLayout) findViewById(R.id.lly_bed_pg_guest_house);
+
+        multiSelectionSpinnerFacilityInPG = (MultiSelectionSpinner) findViewById(R.id.multiple_spin_facility_in_pg);
+
+        multiSelectionSpinnerFacilityInPG.setItems(AssignedToArray);
+//                            multiSelectionSpinnerAssignedToProject.setSelection(new int[]{2});
+        multiSelectionSpinnerFacilityInPG.setListener(UploadRequirementActivity.this);
+
+
+        tv_lly_rooms_house_apartment_villa = (TextView) findViewById(R.id.tv_lly_rooms_house_apartment_villa);
+        lly_rooms_house_apartment_villa= (LinearLayout) findViewById(R.id.lly_rooms_house_apartment_villa);
+        button_furnishing_in_villa_apart_house= (LinearLayout) findViewById(R.id.button_furnishing_in_villa_apart_house);
+        final ProgressBar pb_colored = (ProgressBar) findViewById(R.id.pb_colored);
+
 
         auto_preferred_location = (AutoCompleteTextView) findViewById(R.id.auto_preferred_location);
         auto_preferred_location.setThreshold(0);
@@ -110,21 +166,25 @@ public class UploadRequirementActivity extends AppCompatActivity
 
         spinner_city = (Spinner) findViewById(R.id.spinner_city);
         spinner_distance_from_office = (Spinner) findViewById(R.id.spinner_distance_from_office);
-
+        tv_visit_time = (TextView) findViewById(R.id.tv_visit_time);
+        spinner_visit_time = (Spinner) findViewById(R.id.spinner_visit_time);
 
 
         ArrayAdapter<String> adapterDistance = new ArrayAdapter<String>
                 (UploadRequirementActivity.this, android.R.layout.simple_list_item_1, auto_distance_from_officeArrayList);
         spinner_distance_from_office.setAdapter(adapterDistance);
 
+        ArrayAdapter<String> adapterVisitTime = new ArrayAdapter<String>
+                (UploadRequirementActivity.this, android.R.layout.simple_list_item_1, visitTimeArrayList);
+        spinner_visit_time.setAdapter(adapterVisitTime);
 
 
         et_specification = (EditText) findViewById(R.id.et_specification);
-        house = (TextView) findViewById(R.id.house);
-        apartments = (TextView) findViewById(R.id.apartments);
-        pg = (TextView) findViewById(R.id.pg);
-        villa = (TextView) findViewById(R.id.villa);
-        guest_house = (TextView) findViewById(R.id.guest_house);
+//        house = (TextView) findViewById(R.id.house);
+//        apartments = (TextView) findViewById(R.id.apartments);
+//        pg = (TextView) findViewById(R.id.pg);
+//        villa = (TextView) findViewById(R.id.villa);
+//        guest_house = (TextView) findViewById(R.id.guest_house);
 
         row = (Button) findViewById(R.id.row);
         fully = (Button) findViewById(R.id.fully);
@@ -137,6 +197,13 @@ public class UploadRequirementActivity extends AppCompatActivity
         room_five_plus = (Button) findViewById(R.id.room_five_plus);
 
 
+        bed_one = (Button) findViewById(R.id.bed_one);
+        bed_two = (Button) findViewById(R.id.bed_two);
+        bed_three = (Button) findViewById(R.id.bed_three);
+        bed_four = (Button) findViewById(R.id.bed_four);
+        bed_five = (Button) findViewById(R.id.bed_five);
+        bed_five_plus = (Button) findViewById(R.id.bed_five_plus);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar_include);
         toolbarTitle = (TextView) findViewById(R.id.toolbar_title_include);
 
@@ -145,15 +212,39 @@ public class UploadRequirementActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        toolbarTitle.setText("Upload Requirement");
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null) {
+            startValue = Integer.parseInt(extras.getString("first"));
+            endValue = Integer.parseInt(extras.getString("second"));
+
+            priceMinimum=startValue;
+            priceMaximum=endValue;
+        }
+        typeOfPropertyTitle = getIntent().getStringExtra("typeOfProperty");
+        toolbarTitle.setText(typeOfPropertyTitle);
 
 
 
-        lny_guest_house= (LinearLayout)findViewById(R.id.lny_guest_house);
-        lny_apartments= (LinearLayout)findViewById(R.id.lny_apartments);
-        lny_house= (LinearLayout)findViewById(R.id.lny_house);
-        lny_pg= (LinearLayout)findViewById(R.id.lny_pg);
-        lny_villa= (LinearLayout)findViewById(R.id.lny_villa);
+        if(typeOfPropertyTitle.equals("PG")||typeOfPropertyTitle.equals("Builder Floor")||typeOfPropertyTitle.equals("Apartments")||typeOfPropertyTitle.equals("Villa")){
+            tv_visit_time.setVisibility(View.GONE);
+            spinner_visit_time.setVisibility(View.GONE);
+        }
+
+
+        if(typeOfPropertyTitle!=null){
+            if(typeOfPropertyTitle.equals("PG")||typeOfPropertyTitle.equals("Guest House")){
+                tv_lly_bed_pg_guest_house.setVisibility(View.VISIBLE);
+                lly_bed_pg_guest_house.setVisibility(View.VISIBLE);
+                multiSelectionSpinnerFacilityInPG.setVisibility(View.VISIBLE);
+                tv_facility_in_pg.setVisibility(View.VISIBLE);
+            }
+            if(typeOfPropertyTitle.equals("Builder Floor")||typeOfPropertyTitle.equals("Apartments")||typeOfPropertyTitle.equals("Villa")){
+                tv_lly_rooms_house_apartment_villa.setVisibility(View.VISIBLE);
+                lly_rooms_house_apartment_villa.setVisibility(View.VISIBLE);
+                tv_furnishing_in_villa_apart_house.setVisibility(View.VISIBLE);
+                button_furnishing_in_villa_apart_house.setVisibility(View.VISIBLE);
+            }
+        }
 
         cityArrayList.clear();
         cityArrayList.add("Select a city");
@@ -165,8 +256,8 @@ public class UploadRequirementActivity extends AppCompatActivity
 
 
         if (!cityArrayList.equals("Select a city")) {
-            Log.e("keshav","fetch city list");
-                new GetCityFetch().execute();
+            Log.e("keshav", "fetch city list");
+            new GetCityFetch().execute();
         }
 
 
@@ -196,7 +287,7 @@ public class UploadRequirementActivity extends AppCompatActivity
                     auto_preferred_location.setText("");
                     auto_preferred_locationArrayList.clear();
 
-                    Log.e("keshav", "second list-> " +auto_preferred_locationArrayList);
+                    Log.e("keshav", "second list-> " + auto_preferred_locationArrayList);
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>
                             (UploadRequirementActivity.this, android.R.layout.simple_list_item_1, auto_preferred_locationArrayList);
@@ -216,6 +307,9 @@ public class UploadRequirementActivity extends AppCompatActivity
         final TextView max = (TextView) findViewById(R.id.maxValue);
 
         // create RangeSeekBar as Integer range between 20 and 75
+
+        // TODO Range Seek Bar Increase with one
+        /*
         final RangeSeekBar<Integer> seekBar = new RangeSeekBar<Integer>(0, 100000, this);
 
         seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
@@ -231,86 +325,47 @@ public class UploadRequirementActivity extends AppCompatActivity
                 priceMaximum = maxValue;
 
             }
+        });*/
+        // TODO Range Seek Bar Decrease with one
+
+        // TODO Range Seek Bar Increase with 500
+
+
+        min.setText(""+startValue);
+        max.setText(""+endValue);
+
+//        int startValue = 1000;
+//        int endValue = 500000;
+        final int factor=500;
+
+        RangeSeekBar<Integer> seekBar = new RangeSeekBar<Integer>(startValue / factor, endValue / factor, this);
+         seekBar = new RangeSeekBar<Integer>(startValue / factor, endValue / factor, this);
+        seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+            @Override
+            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
+                minValue = minValue * factor;
+                maxValue *= factor;
+                //  value.setText(minValue + " : " + maxValue);
+
+                min.setText(minValue.toString());
+                max.setText(maxValue.toString());
+
+                priceMinimum = minValue;
+                priceMaximum = maxValue;
+            }
         });
 
-        // add RangeSeekBar to pre-defined layout
-        ViewGroup layout = (ViewGroup) findViewById(R.id.layout);
-        layout.addView(seekBar);
+        // TODO Range Seek Bar Decrease with 500
+
+        // TODO add RangeSeekBar to pre-defined layout
+            ViewGroup layout = (ViewGroup) findViewById(R.id.layout);
+            layout.addView(seekBar);
+        // TODO add RangeSeekBar to pre-defined layout
 
         et_date_of_shifting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog(0);
-            }
-        });
-
-
-
-        lny_house.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                typeOfProperty = house.getText().toString();
-                lny_house.setBackgroundColor(getResources().getColor(R.color.button_select));
-                lny_apartments.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_pg.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_villa.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_guest_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-
-                Log.e("typeOfProperty", "house -> " + typeOfProperty);
-
-            }
-        });
-        lny_apartments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                typeOfProperty = apartments.getText().toString();
-
-                lny_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_apartments.setBackgroundColor(getResources().getColor(R.color.button_select));
-                lny_pg.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_villa.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_guest_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-
-                Log.e("typeOfProperty", "apartments ->" + typeOfProperty);
-            }
-        });
-        lny_pg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                typeOfProperty = pg.getText().toString();
-                lny_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_apartments.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_pg.setBackgroundColor(getResources().getColor(R.color.button_select));
-                lny_villa.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_guest_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-
-                Log.e("typeOfProperty", "is -> " + typeOfProperty);
-            }
-        });
-        lny_villa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                typeOfProperty = villa.getText().toString();
-                lny_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_apartments.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_pg.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_villa.setBackgroundColor(getResources().getColor(R.color.button_select));
-                lny_guest_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                Log.e("typeOfProerty", "is ->" + typeOfProperty);
-            }
-        });
-
-        lny_guest_house.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                typeOfProperty = guest_house.getText().toString();
-
-                lny_house.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_apartments.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_pg.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_villa.setBackgroundColor(getResources().getColor(R.color.button_deselect));
-                lny_guest_house.setBackgroundColor(getResources().getColor(R.color.button_select));
-                Log.e("typeOfProerty", "is ->" + typeOfProperty);
             }
         });
 
@@ -427,6 +482,140 @@ public class UploadRequirementActivity extends AppCompatActivity
             }
         });
 
+
+        bed_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomNumber = bed_one.getText().toString();
+                Log.e("bed_one", "is " + roomNumber);
+                bed_one.setBackgroundColor(getResources().getColor(R.color.select));
+                bed_two.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_three.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_four.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five_plus.setBackgroundColor(getResources().getColor(R.color.deselect));
+            }
+        });
+
+        bed_two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomNumber = bed_two.getText().toString();
+                Log.e("bed_two", "is " + roomNumber);
+                bed_one.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_two.setBackgroundColor(getResources().getColor(R.color.select));
+                bed_three.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_four.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five_plus.setBackgroundColor(getResources().getColor(R.color.deselect));
+            }
+        });
+
+        bed_three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomNumber = bed_three.getText().toString();
+                Log.e("bed_three", "is " + roomNumber);
+                bed_one.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_two.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_three.setBackgroundColor(getResources().getColor(R.color.select));
+                bed_four.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five_plus.setBackgroundColor(getResources().getColor(R.color.deselect));
+            }
+        });
+        bed_four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomNumber = bed_four.getText().toString();
+                Log.e("bed_three", "is " + roomNumber);
+                bed_one.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_two.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_three.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_four.setBackgroundColor(getResources().getColor(R.color.select));
+                bed_five.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five_plus.setBackgroundColor(getResources().getColor(R.color.deselect));
+            }
+        });
+        bed_five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomNumber = bed_five.getText().toString();
+                Log.e("bed_three", "is " + roomNumber);
+                bed_one.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_two.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_three.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_four.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five.setBackgroundColor(getResources().getColor(R.color.select));
+                bed_five_plus.setBackgroundColor(getResources().getColor(R.color.deselect));
+            }
+        });
+        bed_five_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomNumber = bed_five_plus.getText().toString();
+                Log.e("bed_three", "is " + roomNumber);
+                bed_one.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_two.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_three.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_four.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five.setBackgroundColor(getResources().getColor(R.color.deselect));
+                bed_five_plus.setBackgroundColor(getResources().getColor(R.color.select));
+            }
+        });
+
+
+        // TODO Progress Bar progress Feasibility Meter
+        et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                server = (Integer.parseInt(et.getText().toString()));
+            }
+        });
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Set the progress status zero on each button click
+                progressStatus = 0;
+                // Start the lengthy operation in a background thread
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        server = (Integer.parseInt(et.getText().toString()));
+
+                        while (progressStatus < server) {
+                            // Update the progress status
+                            progressStatus += 1;
+
+                            // Try to sleep the thread for 20 milliseconds
+                            try {
+                                Thread.sleep(20);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Update the progress bar
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pb_colored.setProgress(progressStatus);
+
+                                    // Show the progress on TextView
+                                    tv.setText(progressStatus + "");
+
+                                }
+                            });
+                        }
+                    }
+                }).start(); // Start the operation
+            }
+        });
+
+        // TODO Progress Bar progress Feasibility Meter
+
     }
 
     // TODO Hide previous Date
@@ -464,9 +653,24 @@ public class UploadRequirementActivity extends AppCompatActivity
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                Intent intent=new Intent(UploadRequirementActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+                new android.support.v7.app.AlertDialog.Builder(UploadRequirementActivity.this)
+                        .setTitle("Do you want to go back?")
+                        .setMessage("")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+                                        UploadRequirementActivity.super.onBackPressed();
+//                                        Intent intent = new Intent(UploadRequirementActivity.this, HomeActivity.class);
+//                                        startActivity(intent);
+//                                        finish();
+
+                                    }
+                                }).setNegativeButton("No", null).show();
+
                 break;
 
             case R.id.done:
@@ -477,18 +681,46 @@ public class UploadRequirementActivity extends AppCompatActivity
             default:
                 break;
         }
-
         return false;
     }
 
+
     @Override
     public void onBackPressed() {
+        new android.support.v7.app.AlertDialog.Builder(UploadRequirementActivity.this)
+                .setTitle("Do you want to go back?")
+                .setMessage("")
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
 
-        UploadRequirementActivity.super.onBackPressed();
-        Intent intent = new Intent(UploadRequirementActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                UploadRequirementActivity.super.onBackPressed();
+//                                Intent intent = new Intent(UploadRequirementActivity.this, HomeActivity.class);
+//                                startActivity(intent);
+//                                finish();
+
+                            }
+                        }).setNegativeButton("No", null).show();
     }
+
+    @Override
+    public void selectedIndices(List<Integer> indices) {
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> strings) {
+        Log.e("facility in multiple "," " +strings.toString());
+
+        typeOfFurnishing = strings.toString().replace("[","").replace("]","");
+
+        Log.e("typeOfFurnishing", "multiple is " + typeOfFurnishing);
+
+    }
+
 
     public class UploadRequirementAsyncTask extends AsyncTask<String, Void, String> {
         private Dialog mDialog;
@@ -558,15 +790,22 @@ public class UploadRequirementActivity extends AppCompatActivity
                 client.addFormPart("clientId", LoginPreferences.getActiveInstance(UploadRequirementActivity.this).getClientId());
                 client.addFormPart("userId", LoginPreferences.getActiveInstance(UploadRequirementActivity.this).getUserId());
                 client.addFormPart("dateOfShifting", serverSendDateOfShifting);
-                client.addFormPart("typeOfProperty", typeOfProperty);
+                client.addFormPart("typeOfProperty", typeOfPropertyTitle);
                 client.addFormPart("furnishing", typeOfFurnishing);
                 client.addFormPart("rooms", roomNumber);
+                client.addFormPart("city", selectCity);
                 client.addFormPart("preferredLocation", preferredLocation);
                 client.addFormPart("budgetFrom", String.valueOf(priceMinimum));
                 client.addFormPart("budgetTo", String.valueOf(priceMaximum));
                 client.addFormPart("specification", specification);
                 client.addFormPart("distanceFromOffice", distanceFromOffice);
-//                client.addFormPart("specificRequirement", specifiRequirement);
+                client.addFormPart("officeAddress", officeAddress);
+
+
+                if(typeOfPropertyTitle.equals("Guest House")) {
+                    Log.e("typeOfPropertyTitle","Guest House called");
+                    client.addFormPart("visitTime", spinnerVisitTime);
+                }
 
 
                 Log.e("upload", "userId  ->" + LoginPreferences.getActiveInstance(UploadRequirementActivity.this).getUserId());
@@ -586,33 +825,46 @@ public class UploadRequirementActivity extends AppCompatActivity
     private boolean checkValidation() {
         preferredLocation = auto_preferred_location.getText().toString();
         specification = et_specification.getText().toString();
+        officeAddress = et_office_address.getText().toString();
         selectCity = spinner_city.getSelectedItem().toString();
         distanceFromOffice = spinner_distance_from_office.getSelectedItem().toString();
+        spinnerVisitTime = spinner_visit_time.getSelectedItem().toString();
 
         Log.e("DateOfShifting", "is " + serverSendDateOfShifting);
-        Log.e("typeOfProperty", "is " + typeOfProperty);
+        Log.e("typeOfPropertyTitle", "is " + typeOfPropertyTitle);
         Log.e("typeOfFurnishing", "is " + typeOfFurnishing);
         Log.e("preferredLocation", "is " + preferredLocation);
         Log.e("roomNumber", "is " + roomNumber);
         Log.e("priceMinimum", "is " + priceMinimum);
         Log.e("priceMaximum", "is " + priceMaximum);
         Log.e("specification", "is " + specification);
+        Log.e("officeAddress", "is " + officeAddress);
         Log.e("distanceFromOffice", "is " + distanceFromOffice);
+        Log.e("spinnerVisitTime", "is " + spinnerVisitTime);
         Log.e("selectCity", "is " + selectCity);
 
         if (serverSendDateOfShifting == null) {
             CommonMethod.showAlert("Please select Date.", UploadRequirementActivity.this);
             return false;
-        } else if (typeOfProperty == null) {
+        } else if (typeOfPropertyTitle == null) {
             CommonMethod.showAlert("Please select Property.", UploadRequirementActivity.this);
             return false;
-        } else if (typeOfFurnishing == null) {
-            CommonMethod.showAlert("Please select Furnishing.", UploadRequirementActivity.this);
+        } else if (typeOfFurnishing == null || typeOfFurnishing != null && typeOfFurnishing.toString().equals("")) {
+            CommonMethod.showAlert("Please Choose Facility.", UploadRequirementActivity.this);
             return false;
         } else if (roomNumber == null) {
-            CommonMethod.showAlert("Please select Room.", UploadRequirementActivity.this);
+            if(typeOfPropertyTitle!=null){
+                if(typeOfPropertyTitle.equals("PG")||typeOfPropertyTitle.equals("Guest House")){
+                    CommonMethod.showAlert("Please select Bed.", UploadRequirementActivity.this);
+                }
+                if(typeOfPropertyTitle.equals("Builder Floor")||typeOfPropertyTitle.equals("Apartments")||typeOfPropertyTitle.equals("Villa")){
+                    CommonMethod.showAlert("Please select Room.", UploadRequirementActivity.this);
+                }
+            }
+
+
             return false;
-        } else if (selectCity == null || selectCity.equals("")||selectCity.equals("Select a city")) {
+        } else if (selectCity == null || selectCity.equals("") || selectCity.equals("Select a city")) {
             CommonMethod.showAlert("Please select city", UploadRequirementActivity.this);
             return false;
         } else if (preferredLocation == null || preferredLocation.equals("")) {
@@ -621,11 +873,15 @@ public class UploadRequirementActivity extends AppCompatActivity
         } else if (!auto_preferred_locationArrayList.contains(preferredLocation)) {
             CommonMethod.showAlert("Please select valid location.", UploadRequirementActivity.this);
             return false;
-        }
-        /*else if (et_specification.getText().toString().equals("")) {
-            CommonMethod.showAlert("Please select Specification.", UploadRequirementActivity.this);
+        } else if (et_office_address.getText().toString().equals("")) {
+            CommonMethod.showAlert("Please select Office Address.", UploadRequirementActivity.this);
             return false;
-        }*/ else if (spinner_distance_from_office.getSelectedItem().toString().equals("Select a distance")) {
+        }
+        else if (typeOfPropertyTitle.equals("Guest House")&&spinner_visit_time.getSelectedItem().toString().equals("Select a time")) {
+            CommonMethod.showAlert("Please select Visit Time.", UploadRequirementActivity.this);
+            return false;
+        }
+        else if (spinner_distance_from_office.getSelectedItem().toString().equals("Select a distance")) {
             CommonMethod.showAlert("Please select Distance From office.", UploadRequirementActivity.this);
             return false;
         }
@@ -690,7 +946,7 @@ public class UploadRequirementActivity extends AppCompatActivity
                                 cityArrayList.add(jsonObject2.getString("name"));
                             }
                             if (cityArrayList != null) {
-                                cityAdapter= new ArrayAdapter<String>
+                                cityAdapter = new ArrayAdapter<String>
                                         (UploadRequirementActivity.this, android.R.layout.simple_list_item_1, cityArrayList);
                                 spinner_city.setAdapter(cityAdapter);
                             } else {
@@ -836,5 +1092,4 @@ public class UploadRequirementActivity extends AppCompatActivity
             return response;
         }
     }
-
 }

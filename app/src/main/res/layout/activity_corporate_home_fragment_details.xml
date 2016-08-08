@@ -322,6 +322,27 @@
 
 
     <RelativeLayout
+        android:id="@+id/rel12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp" >
+
+        <Button
+            android:id="@+id/broker_yes_i_have"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="Call"
+            android:background="@color/select"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_weight="1"
@@ -337,6 +358,6 @@
             android:background="@drawable/call"
             />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </LinearLayout>

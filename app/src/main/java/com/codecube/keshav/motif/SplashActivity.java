@@ -6,15 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import MyPreference.LoginPreferences;
+
 public class SplashActivity extends AppCompatActivity {
 
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-    }*/
-
-    int SPLASH_SCREEN_TIME_IN_MILLIS=1;
+    int SPLASH_SCREEN_TIME_IN_MILLIS=2000;
     Thread thread;
     Handler handler;
 
@@ -25,7 +21,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         handler = new Handler();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -34,20 +29,29 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(SPLASH_SCREEN_TIME_IN_MILLIS);
-                    handler.post(new Runnable() {
-                        public void run() {
-                            goToNextScreen();
-                        }
-                    });
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    if(LoginPreferences.getActiveInstance(SplashActivity.this).getIsLoggedIn()){
+                        Intent i = new Intent(SplashActivity.this, HomeActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                        finish();
+                    }else {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         };
         thread.start();
     }
 
-    protected void goToNextScreen() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 }

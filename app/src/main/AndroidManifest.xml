@@ -29,7 +29,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/motif_logo"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -45,25 +45,14 @@
             android:label=""
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MultipleMessage"
-            android:configChanges="orientation"
-            android:label=""
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-            >
-        </activity>
-        <activity
             android:name=".HomeActivity"
             android:label=""
             android:screenOrientation="portrait" />
         <activity
             android:name=".MessageActivity"
             android:label=""
-            />
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".MultiTouchActivity"
             android:label="" />
@@ -79,16 +68,40 @@
             android:name=".TermAndConditionsActivity"
             android:label="" />
         <activity
+            android:name=".OffersDetailActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            />
+        <activity
             android:name=".UploadRequirementActivity"
             android:label=""
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".YesIHaveActivity"
+            android:label=""
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PostInventoryActivity"
             android:label=""
             android:screenOrientation="portrait" />
         <activity
             android:name=".LogoutActivity"
+            android:label=""
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".RateThisAppActivity"
+            android:label=""
+            android:screenOrientation="portrait" />
+
+        <!--<activity
+            android:name="fragments.MyRequestActivity"
+            android:label=""
+            android:screenOrientation="portrait" />-->
+
+        <activity
+            android:name=".SignInActivity"
             android:label=""
             android:screenOrientation="portrait" />
         <activity
@@ -98,6 +111,16 @@
 
         <activity
             android:name=".HomeFragmentDetailActivity"
+            android:label=""
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".DownloadFiles"
+            android:label=""
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ProfileUpdateActivity"
             android:label=""
             android:screenOrientation="portrait" />
 

@@ -36,20 +36,17 @@ import adapters.PostInventoryCorporateAdapter;
 import adapters.UploadRequirementBrokerAdapter;
 import models.PostInventoryCorporatePojo;
 import models.UploadRequirementBrokerPojo;
+import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
 
-public class CorporateHomeFragment extends Fragment {
-
+public class CorporateHomeFragment extends Fragment
+{
     View convertView;
-
     ListView list_view_corporate;
     ImageView img_no_data_corporate_list;
 
-
     ArrayList<PostInventoryCorporatePojo> postInventoryCorporatePojoArrayList = new ArrayList<PostInventoryCorporatePojo>();
-
-
 
     PostInventoryCorporateAdapter postInventoryCorporateAdapter;
 
@@ -64,6 +61,13 @@ public class CorporateHomeFragment extends Fragment {
 
         list_view_corporate = (ListView) convertView.findViewById(R.id.list_view_corporate);
         img_no_data_corporate_list = (ImageView) convertView.findViewById(R.id.img_no_data_corporate_list);
+
+
+        if(!CommonMethod.isOnline(getActivity()))
+        {
+            CommonMethod.showAlert("Intenet Connectivity Failure",getActivity());
+        }
+
 
         swipe_container_corporate_list = (SwipeRefreshLayout) convertView.findViewById(R.id.swipe_container_corporate_list);
         // Setup refresh listener which triggers new data loading

@@ -4,16 +4,25 @@
     <color name="orange">#FA0</color>
     <color name="pink">#e84052</color>
 
-<!--
+<!-- old
     <color name="select">#A7C9D4</color>
     <color name="deselect">#A4A4A4</color>
+    <color name="select">#FF3434A2</color>
 -->
-    <color name="select">#377eb4</color>
-    <!--<color name="select">#FF3434A2</color>-->
-    <color name="deselect">#CED1D2</color>
 
+    <!--<color name="select">#377eb4</color>
+    <color name="deselect">#CED1D2</color>
+    <color name="lightBlue">#E6F3F9</color>
+    <color name="button_deselect">#CED1D2</color>
+    <color name="button_select">#377eb4</color>-->
+
+    <color name="select">#0e1c63</color>
+    <color name="deselect">#CED1D2</color>
+    <color name="lightBlue">#E6F3F9</color>
     <color name="button_deselect">#CED1D2</color>
     <color name="button_select">#377eb4</color>
+
+
 
 
     <color name="grey">#CCC</color>
@@ -58,7 +67,6 @@
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
     <color name="dtBlue">#CEE6F2</color>
-    <color name="lightBlue">#E6F3F9</color>
     <color name="actionBarColor">#CB3F32</color>
     <color name="transparent">#00000000</color>
     <color name="graphGrey">#A7C9D4</color>

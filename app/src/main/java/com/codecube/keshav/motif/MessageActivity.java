@@ -2,14 +2,12 @@ package com.codecube.keshav.motif;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,11 +20,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,14 +27,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import MyPreference.LoginPreferences;
-import adapters.ChatAdapter;
 import adapters.MessageChatAdapter;
-import adapters.UploadRequirementBrokerAdapter;
-import constant.AppConstants;
-import constant.AppUtils;
-import models.ChatMessage;
 import models.MessageChatPojo;
-import models.UploadRequirementBrokerPojo;
+import utils.CommonMethod;
 import utils.ConstantValues;
 import utils.HttpClient;
 
@@ -53,13 +41,16 @@ public class MessageActivity extends AppCompatActivity
     TextView toolbartitle;
     public static Typeface my_font;
     private ImageView buttonSend;
-
+    Handler handler;
+    Runnable runnable;
     MessageChatAdapter messageChatAdapter;
     String message;
     private ArrayList<MessageChatPojo> messageChatPojoArrayList = new ArrayList<MessageChatPojo>();
 
     SwipeRefreshLayout swipe_container_message_activity;
 
+
+    boolean flagMessage=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +65,16 @@ public class MessageActivity extends AppCompatActivity
 
         toolbartitle.setTypeface(my_font);
 
-        new GetChatMessageAsyncTask().execute();
+        if(!CommonMethod.isOnline(MessageActivity.this))
+        {
+            CommonMethod.showAlert("Intenet Connectivity Failure",MessageActivity.this);
+        }
 
+        new GetChatMessageAsyncTask().execute();
 
         chatText = (EditText) findViewById(R.id.msg);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbartitle.setText("Messages");
+        toolbartitle.setText("Motif Support");
 
         buttonSend = (ImageView) findViewById(R.id.send);
 
@@ -154,8 +149,7 @@ public class MessageActivity extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-
-        MessageActivity.super.onBackPressed();
+     //   MessageActivity.super.onBackPressed();
         Intent intent=new Intent(MessageActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
@@ -198,7 +192,10 @@ public class MessageActivity extends AppCompatActivity
                     String success = object.getString("responseCode");
                     String responseMessage = object.getString("responseMessage");
                     if (success.equals("200")) {
-                        Toast.makeText(MessageActivity.this, responseMessage, Toast.LENGTH_SHORT).show();
+
+                        Log.e("responseMessage","is --> "+ responseMessage);
+
+//                        Toast.makeText(MessageActivity.this, responseMessage, Toast.LENGTH_SHORT).show();
 //                        Intent in = new Intent(MessageActivity.this, HomeActivity.class);
 //                        startActivity(in);
                     } else if (success.equals("1")) {
@@ -252,8 +249,8 @@ public class MessageActivity extends AppCompatActivity
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            mDialog = ProgressDialog.show(MessageActivity.this, "", "Please wait", true);
-            mDialog.setCancelable(false);
+//            mDialog = ProgressDialog.show(MessageActivity.this, "", "Please wait", true);
+//            mDialog.setCancelable(false);
         }
 
         @Override
@@ -281,6 +278,9 @@ public class MessageActivity extends AppCompatActivity
                     object = new JSONObject(response);
                     String success = object.getString("responseCode");
                     String responseMessage = object.getString("responseMessage");
+
+                    Log.e("responseMessage",object.toString(2));
+
                     String total;
                     long totalPrice = 0;
                     Log.d("object", "" + object);
@@ -351,4 +351,31 @@ public class MessageActivity extends AppCompatActivity
             return response;
         }
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler = new Handler();
+        Log.e("keshav", "onResume called");
+
+        runnable = new Runnable() {
+
+            @Override
+            public void run() { //Do something after 20 seconds
+
+                handler.postDelayed(this, 10000);
+                new GetChatMessageAsyncTask().execute();
+            }
+        };
+        handler.postDelayed(runnable, 1000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+        Log.e("keshav", "onPause called");
+    }
+
 }

@@ -4,13 +4,13 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item>
         <item name="colorPrimary">@color/primaryDark</item>
-        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorPrimaryDark">@color/select</item>
 <!--
         <item name="colorControlNormal">@color/textColor</item>
 -->
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:textColorSecondary">@color/textColor</item>
-        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:statusBarColor">@color/select</item>
         <item name="homeAsUpIndicator">@drawable/abc_ic_ab_back_mtrl_am_alpha</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:titleTextAppearance">@style/ToolbarTitle</item>
@@ -252,4 +252,9 @@
     </style>
 
 
+    <style name="MyAlertDialogStyle2" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">#ecf0f1</item>
+        <item name="android:background">@color/select</item>
+    </style>
 </resources>

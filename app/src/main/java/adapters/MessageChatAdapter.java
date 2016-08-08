@@ -92,7 +92,7 @@ public class MessageChatAdapter extends BaseAdapter {
             layoutParams = (LinearLayout.LayoutParams) holder.messageTime.getLayoutParams();
             layoutParams.gravity = Gravity.LEFT;
             holder.messageTime.setLayoutParams(layoutParams);
-        } else {
+        } else if(messageChatPojoList.get(position).getType().equals("corporateToadmin")) {
             holder.contentWithBG.setBackgroundResource(R.drawable.msg_out);
             LinearLayout.LayoutParams layoutParams =
                     (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();

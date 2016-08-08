@@ -2,18 +2,20 @@ package adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codecube.keshav.motif.R;
 
 import java.util.ArrayList;
 
+import MyPreference.LoginPreferences;
 import models.UploadRequirementBrokerPojo;
-import utils.CommonMethod;
 
 
 public class UploadRequirementBrokerAdapter extends BaseAdapter {
@@ -54,55 +56,73 @@ public class UploadRequirementBrokerAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.broker_list_item, null, true);
             holder = new ViewHolder();
 
-//            holder.name = (TextView) convertView.findViewById(R.id.tv_corporate_name_list);
-//            holder.mobileNo = (TextView) convertView.findViewById(R.id.tv_corporate_mobile_list);
-//            holder.dateOfShifting = (TextView) convertView.findViewById(R.id.tv_date_of_shifting);
-//            holder.typeOfProperty = (TextView) convertView.findViewById(R.id.tv_type_of_property);
+            holder.typeOfProperty = (TextView) convertView.findViewById(R.id.tv_type_of_property);
             holder.furnishing = (TextView) convertView.findViewById(R.id.tv_furnishing);
             holder.rooms = (TextView) convertView.findViewById(R.id.tv_rooms);
-//            holder.budgetFrom = (TextView) convertView.findViewById(R.id.tv_budget_rom);
-//            holder.budgetTo = (TextView) convertView.findViewById(R.id.tv_budget_to);
             holder.preferredLocation = (TextView) convertView.findViewById(R.id.tv_preferred_location);
-            holder.distanceFromOffice = (TextView) convertView.findViewById(R.id.tv_distance_from_office);
-//            holder.specificRequirement = (TextView) convertView.findViewById(R.id.tv_specific_requirement);
-//            holder.specification = (TextView) convertView.findViewById(R.id.tv_specification);
-
+            holder.responseStatus = (TextView) convertView.findViewById(R.id.tv_response_status);
+            holder.lly_response = (LinearLayout) convertView.findViewById(R.id.lly_response);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-//        holder.name.setText(uploadRequirementBrokerPojoArrayList.get(position).getName());
-//        holder.mobileNo.setText(uploadRequirementBrokerPojoArrayList.get(position).getMobileNo());
-//        if(uploadRequirementBrokerPojoArrayList.get(position).getDateOfShifting()!=null)
-//        holder.dateOfShifting.setText(CommonMethod.DateFormatApp(uploadRequirementBrokerPojoArrayList.get(position).getDateOfShifting()));
-//        holder.typeOfProperty.setText(uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty());
-        holder.furnishing.setText(uploadRequirementBrokerPojoArrayList.get(position).getFurnishing());
-        holder.rooms.setText(uploadRequirementBrokerPojoArrayList.get(position).getRooms());
+        holder.typeOfProperty.setText(uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty() + " Available For Rent");
+        holder.furnishing.setText(uploadRequirementBrokerPojoArrayList.get(position).getFurnishing()+" Furnish");
+
+        Log.d("typeOfProperty","-> " + uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty());
+
+        if(uploadRequirementBrokerPojoArrayList.get(position).getRooms().equals("1")) {
+            if(uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("PG")
+                    ||uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Guest House")) {
+
+                Log.e("kkk","Bed");
+                holder.rooms.setText(uploadRequirementBrokerPojoArrayList.get(position).getRooms() + " Bed");
+            }
+            if(uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Builder Floor")
+                    ||uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Apartments")
+                ||uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Villa")){
+
+
+                Log.e("kkk","Room");
+                holder.rooms.setText(uploadRequirementBrokerPojoArrayList.get(position).getRooms() + " Room");
+            }
+        }
+        else {
+            if(uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("PG")
+                    ||uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Guest House")) {
+
+                Log.e("kkk","Beds");
+                holder.rooms.setText(uploadRequirementBrokerPojoArrayList.get(position).getRooms() + " Beds");
+            }
+            if(uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Builder Floor")
+                    ||uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Apartments")
+                    ||uploadRequirementBrokerPojoArrayList.get(position).getTypeOfProperty().equals("Villa")){
+
+                Log.e("kkk","Rooms");
+                holder.rooms.setText(uploadRequirementBrokerPojoArrayList.get(position).getRooms() + " Rooms");
+            }
+        }
+
         holder.preferredLocation.setText(uploadRequirementBrokerPojoArrayList.get(position).getPreferredLocation());
-//        holder.budgetFrom.setText(uploadRequirementBrokerPojoArrayList.get(position).getBudgetFrom());
-//        holder.budgetTo.setText(uploadRequirementBrokerPojoArrayList.get(position).getBudgetTo());
-        holder.distanceFromOffice.setText(uploadRequirementBrokerPojoArrayList.get(position).getDistanceFromOffice());
-//        holder.specificRequirement.setText(uploadRequirementBrokerPojoArrayList.get(position).getSpecificRequirement());
-//        holder.specification.setText(uploadRequirementBrokerPojoArrayList.get(position).getSpecification());
+        holder.responseStatus.setText(uploadRequirementBrokerPojoArrayList.get(position).getResponseStatus());
+
+        if(LoginPreferences.getActiveInstance(mcontext).getUserType().equals("Employee")){
+
+            Log.e("keshav","hide responded in Employee");
+            holder.lly_response.setVisibility(View.GONE);
+        }
 
         return convertView;
     }
 
     public class ViewHolder {
-        TextView name;
-        TextView mobileNo;
-        TextView dateOfShifting;
         TextView typeOfProperty;
-        TextView specification;
         TextView furnishing;
         TextView rooms;
         TextView preferredLocation;
-        TextView budgetFrom;
-        TextView budgetTo;
-        TextView specificRequirement;
-        TextView distanceFromOffice;
-
+        TextView responseStatus;
+        LinearLayout lly_response;
     }
 }

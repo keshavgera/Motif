@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/lightBlue"
     tools:context="com.codecube.keshav.motif.UploadRequirementActivity">
 
     <RelativeLayout
@@ -40,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/box_layout_margin_left"
                 android:layout_marginRight="@dimen/box_layout_margin_right"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:padding="@dimen/text_input_padding">
 
                 <EditText
@@ -65,190 +66,37 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
+                android:id="@+id/tv_facility_in_pg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
                 android:padding="@dimen/text_input_padding"
-                android:text="Type of Property"
+                android:text="Facility"
                 android:textColor="#000000" />
 
-            <HorizontalScrollView
-                android:id="@+id/horizontal_type_of_property"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginLeft="@dimen/box_layout_margin_left"
-                android:layout_marginRight="@dimen/box_layout_margin_right"
-                android:layout_weight="1"
-                android:fadingEdge="none"
-                android:padding="@dimen/text_input_padding"
-                android:orientation="horizontal"
-                android:weightSum="5"
-                android:scrollbars="none">
+            <utils.MultiSelectionSpinner
+                android:id="@+id/multiple_spin_facility_in_pg"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:spinnerMode="dropdown"
+                android:visibility="gone"
+                android:paddingBottom="10dp"
+                />
 
-                <LinearLayout
-                    android:id="@+id/ln_type_of_property"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:weightSum="5"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/lny_guest_house"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:background="@color/button_deselect"
-                        android:weightSum="2">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:layout_marginTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:src="@drawable/guest_house" />
-
-                        <TextView
-                            android:id="@+id/guest_house"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:text="Guest House"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textColor="@drawable/selector_button" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lny_house"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:background="@color/button_deselect"
-                        android:weightSum="2">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:layout_marginTop="5dp"
-                            android:paddingBottom="5dp"
-                            android:src="@drawable/house" />
-
-                        <TextView
-                            android:id="@+id/house"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:text="House"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:textColor="@drawable/selector_button" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lny_apartments"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:background="@color/button_deselect"
-                        android:weightSum="2">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:paddingBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/apartment" />
-
-                        <TextView
-                            android:id="@+id/apartments"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:text="Apartments"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textColor="@drawable/selector_button" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lny_pg"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"
-                        android:background="@color/button_deselect"
-                        android:orientation="vertical"
-                        android:weightSum="2">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:paddingBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/pg" />
-
-                        <TextView
-                            android:id="@+id/pg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:text="PG"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textColor="@drawable/selector_button" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lny_villa"
-                        android:layout_width="100dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"
-                        android:background="@color/button_deselect"
-                        android:orientation="vertical"
-                        android:weightSum="2">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:paddingBottom="5dp"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/villa" />
-
-                        <TextView
-                            android:id="@+id/villa"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:text="Villa"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textColor="@drawable/selector_button" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+<!--
+android:background="@drawable/edit_text_bottom_border"-->
 
             <TextView
+                android:id="@+id/tv_furnishing_in_villa_apart_house"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:visibility="gone"
                 android:layout_marginRight="@dimen/box_layout_margin_right"
                 android:layout_marginTop="5dp"
                 android:padding="@dimen/text_input_padding"
@@ -257,10 +105,12 @@
 
 
             <LinearLayout
+                android:id="@+id/button_furnishing_in_villa_apart_house"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:visibility="gone"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
@@ -297,21 +147,25 @@
 
 
             <TextView
+                android:id="@+id/tv_lly_rooms_house_apartment_villa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="@dimen/box_layout_margin_right"
                 android:layout_marginTop="5dp"
                 android:padding="@dimen/text_input_padding"
+                android:visibility="gone"
                 android:text="Rooms"
                 android:textColor="#000000" />
 
             <LinearLayout
+                android:id="@+id/lly_rooms_house_apartment_villa"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
+                android:visibility="gone"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="6">
@@ -373,16 +227,82 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_lly_bed_pg_guest_house"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="@dimen/box_layout_margin_right"
                 android:layout_marginTop="5dp"
-                android:paddingTop="@dimen/text_input_padding"
-                android:paddingLeft="@dimen/text_input_padding"
-                android:paddingRight="@dimen/text_input_padding"
-                android:text="Select a City"
+                android:visibility="gone"
+                android:padding="@dimen/text_input_padding"
+                android:text="Beds"
                 android:textColor="#000000" />
+
+            <LinearLayout
+                android:id="@+id/lly_bed_pg_guest_house"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <Button
+                    android:id="@+id/bed_one"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/deselect"
+                    android:text="1"
+                    android:textColor="@drawable/selector_button" />
+
+                <Button
+                    android:id="@+id/bed_two"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/deselect"
+                    android:text="2"
+                    android:textColor="@drawable/selector_button" />
+
+                <Button
+                    android:id="@+id/bed_three"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/deselect"
+                    android:text="3"
+                    android:textColor="@drawable/selector_button" />
+                <Button
+                    android:id="@+id/bed_four"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/deselect"
+                    android:text="4"
+                    android:textColor="@drawable/selector_button" />
+                <Button
+                    android:id="@+id/bed_five"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/deselect"
+                    android:text="5"
+                    android:textColor="@drawable/selector_button" />
+                <Button
+                    android:id="@+id/bed_five_plus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/deselect"
+                    android:text="5+"
+                    android:textColor="@drawable/selector_button" />
+
+            </LinearLayout>
+
 
             <Spinner
                 android:id="@+id/spinner_city"
@@ -419,7 +339,7 @@
                     android:paddingRight="@dimen/edit_input_padding"
                     android:paddingTop="@dimen/edit_input_padding"
                     android:singleLine="true"
-                     />
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -447,14 +367,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:layout_weight=".8"
-                    android:text="0" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/maxValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".2"
-                    android:text="100000" />
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
@@ -493,6 +413,33 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_office_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/box_layout_margin_left"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:layout_marginTop="10dp"
+                android:padding="@dimen/text_input_padding">
+
+                <EditText
+                    android:id="@+id/et_office_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="Office Address"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/edit_input_padding"
+                    android:paddingRight="@dimen/edit_input_padding"
+                    android:paddingTop="@dimen/edit_input_padding"
+                    android:singleLine="true"
+                    android:textSize="17sp"
+                    ></EditText>
+
+            </android.support.design.widget.TextInputLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -513,6 +460,88 @@
                 android:paddingBottom="1dp"
                 android:textSize="17sp"
                 />
+
+            <TextView
+                android:id="@+id/tv_visit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/box_layout_margin_right"
+                android:paddingTop="@dimen/text_input_padding"
+                android:paddingLeft="@dimen/text_input_padding"
+                android:paddingRight="@dimen/text_input_padding"
+                android:text="Visit Time"
+                android:textColor="#000000" />
+
+            <Spinner
+                android:id="@+id/spinner_visit_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="1dp"
+                android:textSize="17sp"
+                />
+
+
+
+
+
+            <EditText
+                android:id="@+id/et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                android:inputType="number"
+                android:max="100"
+                android:text="67" />
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                android:text="0" />
+
+            <ProgressBar
+                android:id="@+id/pb_colored"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:progressDrawable="@drawable/progress_feasablity_meter"   />
+
+            <RelativeLayout
+                android:id="@+id/rly_check_feasibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="40dp" >
+
+                <Button
+                    android:id="@+id/btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:text="Check feasibility"
+                    android:background="@color/select"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
